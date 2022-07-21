@@ -1,3 +1,12 @@
 <resources>
     <dimen name="fab_margin">16dp</dimen>
+
+    <dimen name="def_margin_max">30dp</dimen>
+    <dimen name="def_margin_max_half">15dp</dimen>
+    <dimen name="def_margin">18dp</dimen>
+    <dimen name="def_half_margin">20dp</dimen>
+    <dimen name="def_half_half_margin">10dp</dimen>
+    <dimen name="def_quad_margin">4dp</dimen>
+    <dimen name="def_quad_margin_max">6dp</dimen>
+
 </resources>
