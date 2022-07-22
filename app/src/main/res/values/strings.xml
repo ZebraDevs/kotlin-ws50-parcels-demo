@@ -2,7 +2,10 @@
     <string name="app_name">CSV Barcode Lookup</string>
 
     <string name="init_screen_emdk_check">Initialising EMDK …</string>
-    <string name="init_screen_emdk_success">EMDK Manager successfully initialised …</string>
-    <string name="init_screen_emdk_failed">Failed to initialise EMDK Manager …</string>
+    <string name="init_screen_emdk_success">EMDK Manager successfully initialised</string>
+    <string name="init_screen_emdk_failed">Failed to initialise EMDK Manager</string>
+
+    <string name="init_process_storage_permission_profile_failed">Failed to process storage permission profile</string>
+    <string name="init_process_storage_permission_profile_success">Successfully processed storage permission profile</string>
 
 </resources>

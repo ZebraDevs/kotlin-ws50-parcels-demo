@@ -8,7 +8,7 @@ android {
 
     defaultConfig {
         applicationId "com.zebra.nilac.csvbarcodelookup"
-        minSdk 21
+        minSdk 30
         targetSdk 32
         versionCode 1
         versionName "1.0"
