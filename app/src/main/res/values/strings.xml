@@ -8,4 +8,7 @@
     <string name="init_process_storage_permission_profile_failed">Failed to process storage permission profile</string>
     <string name="init_process_storage_permission_profile_success">Successfully processed storage permission profile</string>
 
+    <string name="init_process_dw_profile_failed">Failed to process DW profile</string>
+    <string name="init_process_dw_profile_success">Successfully processed DW profile</string>
+
 </resources>
