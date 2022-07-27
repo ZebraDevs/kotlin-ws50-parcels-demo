@@ -11,4 +11,8 @@
     <string name="init_process_dw_profile_failed">Failed to process DW profile</string>
     <string name="init_process_dw_profile_success">Successfully processed DW profile</string>
 
+    <string name="init_process_load_csv_data">Importing CSV Data from file…</string>
+    <string name="init_process_load_csv_data_failed">Failed to load data from CSV file: %s</string>
+    <string name="init_process_load_csv_data_success">Successfully loaded data from CSV file</string>
+
 </resources>

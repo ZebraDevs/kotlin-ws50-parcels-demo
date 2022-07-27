@@ -10,10 +10,12 @@ import android.os.Parcelable
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.zebra.nilac.csvbarcodelookup.databinding.ActivityInitBinding
+import com.zebra.nilac.csvbarcodelookup.utils.ExcelDataExtractor
 import com.zebra.nilac.emdkloader.EMDKLoader
 import com.zebra.nilac.emdkloader.ProfileLoader
 import com.zebra.nilac.emdkloader.interfaces.EMDKManagerInitCallBack
 import com.zebra.nilac.emdkloader.interfaces.ProfileLoaderResultCallback
+import java.io.File
 
 class InitActivity : AppCompatActivity() {
 
@@ -90,7 +92,7 @@ class InitActivity : AppCompatActivity() {
                         bundle.getString("PROFILE_NAME") != null
                     ) {
                         Log.i(TAG, "DW Profile already exists, skipping creation part")
-                        //TODO Proceed with the check of excel file
+                        importCsvData()
                     } else {
                         Log.w(
                             TAG,
@@ -136,6 +138,49 @@ class InitActivity : AppCompatActivity() {
                     runOnUiThread {
                         mBinder.loadingStatusText.text =
                             getString(R.string.init_process_dw_profile_success)
+                    }
+                }
+            })
+    }
+
+    private fun importCsvData() {
+        Log.i(TAG, "Importing data from CSV File...")
+        mBinder.loadingStatusText.text =
+            getString(R.string.init_process_load_csv_data)
+
+        val csvFile =
+            File(Environment.getExternalStorageDirectory().absolutePath + "/${AppConstants.FOLDER_NAME}/excel-to-load.csv")
+        if (!csvFile.exists()) {
+            Log.i(
+                TAG,
+                "No CSV File found at specified destination, assuming there's nothing to update!"
+            )
+            //TODO Launch Main Activity
+            return
+        }
+
+        ExcelDataExtractor.extractDataFromFile(
+            csvFile, object : ExcelDataExtractor.CallBacks {
+                override fun onFinished() {
+                    Log.i(TAG, "Successfully imported data from CSV file...")
+                    runOnUiThread {
+                        mBinder.loadingStatusText.text =
+                            getString(R.string.init_process_load_csv_data_success)
+                    }
+
+                    //Delete the imported file
+                    csvFile.delete()
+                    //TODO Launch Main Activity
+                }
+
+                override fun onFailed(errorMessage: String) {
+                    Log.e(TAG, "Failed to load CSV data:\n$errorMessage")
+                    runOnUiThread {
+                        mBinder.loadingStatusText.text =
+                            getString(
+                                R.string.init_process_load_csv_data_failed,
+                                errorMessage
+                            )
                     }
                 }
             })
