@@ -14,4 +14,7 @@ interface ProductsDao {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertNewProduct(product: Product)
+
+    @Query("DELETE FROM products")
+    fun cleanAll()
 }

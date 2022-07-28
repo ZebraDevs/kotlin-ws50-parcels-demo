@@ -20,7 +20,7 @@ data class Product(
     var name: String = "",
 
     @ColumnInfo(name = "Vulpad_nummer")
-    var number: Long = 0L,
+    var number: Int = 0,
 
     @ColumnInfo(name = "OMSCHRIJVING")
     var description: String = "",

@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 import com.zebra.nilac.csvbarcodelookup.dao.ProductsDao
 import com.zebra.nilac.csvbarcodelookup.models.Product
 
-@Database(version = 1, entities = [Product::class], exportSchema = false)
+@Database(version = 2, entities = [Product::class], exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract val productsDao: ProductsDao

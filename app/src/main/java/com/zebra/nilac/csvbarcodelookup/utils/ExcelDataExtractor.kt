@@ -5,6 +5,7 @@ import com.opencsv.CSVParser
 import com.opencsv.CSVParserBuilder
 import com.opencsv.CSVReader
 import com.opencsv.CSVReaderBuilder
+import com.zebra.nilac.csvbarcodelookup.AppDatabase
 import com.zebra.nilac.csvbarcodelookup.DefaultApplication
 import com.zebra.nilac.csvbarcodelookup.models.Product
 import kotlinx.coroutines.Dispatchers
@@ -20,6 +21,7 @@ object ExcelDataExtractor {
     private const val TAG = "ExcelDataExtractor"
 
     private var mCallBacks: CallBacks? = null
+    private var database: AppDatabase? = null
 
     fun extractDataFromFile(targetFile: File, callBacks: CallBacks) {
         mCallBacks = callBacks
@@ -39,26 +41,34 @@ object ExcelDataExtractor {
             .withCSVParser(separator)
             .build()
 
+        database = DefaultApplication.getInstance().getAppDatabaseInstance()
+
         var nextCell: Array<String>?
 
         MainScope().launch(Dispatchers.IO) {
+            //Clean all records first
+            database?.productsDao!!.cleanAll()
+
             try {
                 while (reader.readNext().also { nextCell = it } != null) {
                     val product: Product = Product()
 
-                    if (nextCell == null) {
+                    if (nextCell.isNullOrEmpty()) {
                         break
+                    }
+
+                    //If the row doesn't contain the barcode, skip it...
+                    if (nextCell!![3].isEmpty()) {
+                        continue
                     }
 
                     product.description = nextCell!![2]
                     product.barcode = nextCell!![3]
                     product.name = nextCell!![5]
-                    product.number = product.number.apply {
-                        try {
-                            nextCell!![6].toLong()
-                        } catch (ex: NumberFormatException) {
-                            product.number = 0L
-                        }
+                    product.number = try {
+                        nextCell!![6].toInt()
+                    } catch (ex: NumberFormatException) {
+                        0
                     }
                     pourDataToLocalDb(product)
                 }
@@ -73,10 +83,8 @@ object ExcelDataExtractor {
     private fun pourDataToLocalDb(product: Product) {
         Log.d(TAG, "Pouring new product into DB with info:\n ${product.toString()}")
 
-        val database = DefaultApplication.getInstance().getAppDatabaseInstance()
-
         //Pour extracted product into our DB
-        database.productsDao.insertNewProduct(product)
+        database?.productsDao!!.insertNewProduct(product)
     }
 
     interface CallBacks {
