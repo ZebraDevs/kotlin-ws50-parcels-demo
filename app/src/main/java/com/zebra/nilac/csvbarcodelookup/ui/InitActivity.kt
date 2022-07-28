@@ -141,6 +141,7 @@ class InitActivity : AppCompatActivity() {
                         mBinder.loadingStatusText.text =
                             getString(R.string.init_process_dw_profile_success)
                     }
+                    importCsvData()
                 }
             })
     }
