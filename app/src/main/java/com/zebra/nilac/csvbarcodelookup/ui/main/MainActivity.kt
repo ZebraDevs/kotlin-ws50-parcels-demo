@@ -95,7 +95,8 @@ class MainActivity : AppCompatActivity() {
                 getString(R.string.main_screen_barcode_scan_failed),
                 Snackbar.LENGTH_INDEFINITE
             ).also {
-                it.setBackgroundTint(getColor(R.color.purple_200))
+                it.setBackgroundTint(getColor(R.color.secondary_color))
+                it.setTextColor(getColor(R.color.black))
                 it.show()
             }
     }
