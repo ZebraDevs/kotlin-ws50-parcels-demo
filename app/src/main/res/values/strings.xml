@@ -15,4 +15,7 @@
     <string name="init_process_load_csv_data_failed">Failed to load data from CSV file: %s</string>
     <string name="init_process_load_csv_data_success">Successfully loaded data from CSV file</string>
 
+    <string name="main_screen_welcome_text">Scan a barcode to start!</string>
+    <string name="main_screen_barcode_scan_failed">No product was found with the scanned barcode</string>
+
 </resources>

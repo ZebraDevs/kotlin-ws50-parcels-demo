@@ -9,7 +9,7 @@ import android.os.Environment
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.zebra.nilac.csvbarcodelookup.AppConstants
-import com.zebra.nilac.csvbarcodelookup.MainActivity
+import com.zebra.nilac.csvbarcodelookup.ui.main.MainActivity
 import com.zebra.nilac.csvbarcodelookup.R
 import com.zebra.nilac.csvbarcodelookup.databinding.ActivityInitBinding
 import com.zebra.nilac.csvbarcodelookup.utils.ExcelDataExtractor

@@ -10,7 +10,7 @@ import com.zebra.nilac.csvbarcodelookup.models.Product
 interface ProductsDao {
 
     @Query("SELECT * FROM products WHERE :barcode == COLLO_EAN")
-    fun getProductByBarcode(barcode: String): Product
+    fun getProductByBarcode(barcode: String): Product?
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertNewProduct(product: Product)
