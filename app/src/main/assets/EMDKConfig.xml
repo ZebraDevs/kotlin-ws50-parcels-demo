@@ -28,11 +28,10 @@
         <characteristic type="ActivitySelection" version="0.1">
             <parm name="emdk_name" value="" />
             <characteristic type="Application">
-                <parm name="PrefixAppName" value="false" />
+                <parm name="PrefixAppName" value="true" />
                 <parm name="package" value="com.zebra.nilac.csvbarcodelookup" />
                 <characteristic type="Activities">
-                    <parm name="activity"
-                        value="com.zebra.nilac.csvbarcodelookup.MainActivity" />
+                    <parm name="activity" value="ui.main.MainActivity" />
                 </characteristic>
             </characteristic>
         </characteristic>

@@ -2,10 +2,7 @@ package com.zebra.nilac.csvbarcodelookup.ui.main
 
 import android.content.*
 import android.graphics.Color
-import android.os.Bundle
-import android.os.Handler
-import android.os.IBinder
-import android.os.Looper
+import android.os.*
 import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
@@ -39,9 +36,18 @@ class MainActivity : AppCompatActivity() {
 
         mainViewModel.productResponse.observe(this, productObserver)
 
-        val intent =
-            Intent().setComponent(ComponentName("com.zebra.led", "com.zebra.led.LedService"))
-        bindService(intent, ledConnection, BIND_AUTO_CREATE)
+        //Check if we're using the app on a WS50 for Led Capabilities
+        if (Build.MODEL == "WS50") {
+            val intent =
+                Intent().setComponent(ComponentName("com.zebra.led", "com.zebra.led.LedService"))
+            bindService(intent, ledConnection, BIND_AUTO_CREATE)
+        } else {
+            //Register Scan Receiver
+            registerReceiver(
+                scannerReceiver,
+                IntentFilter(AppConstants.DW_SCANNER_INTENT_ACTION)
+            )
+        }
     }
 
     override fun onBackPressed() {
