@@ -12,6 +12,7 @@ import com.zebra.nilac.csvbarcodelookup.AppConstants
 import com.zebra.nilac.csvbarcodelookup.ui.main.MainActivity
 import com.zebra.nilac.csvbarcodelookup.R
 import com.zebra.nilac.csvbarcodelookup.databinding.ActivityInitBinding
+import com.zebra.nilac.csvbarcodelookup.ui.main.SettingsActivity
 import com.zebra.nilac.csvbarcodelookup.utils.ExcelDataExtractor
 import com.zebra.nilac.emdkloader.EMDKLoader
 import com.zebra.nilac.emdkloader.ProfileLoader
@@ -159,7 +160,7 @@ class InitActivity : AppCompatActivity() {
                 "No CSV File found at specified destination, assuming there's nothing to update!"
             )
             finish()
-            startActivity(Intent(this@InitActivity, MainActivity::class.java))
+            startActivity(Intent(this@InitActivity, SettingsActivity::class.java))
             return
         }
 
@@ -176,7 +177,7 @@ class InitActivity : AppCompatActivity() {
                     csvFile.delete()
 
                     finish()
-                    startActivity(Intent(this@InitActivity, MainActivity::class.java))
+                    startActivity(Intent(this@InitActivity, SettingsActivity::class.java))
                 }
 
                 override fun onFailed(errorMessage: String) {

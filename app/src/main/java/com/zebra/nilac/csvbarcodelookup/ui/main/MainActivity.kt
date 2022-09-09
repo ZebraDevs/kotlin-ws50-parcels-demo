@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity() {
         mainViewModel.productResponse.observe(this, productObserver)
 
         //Check if we're using the app on a WS50 for Led Capabilities
-        if (Build.MODEL == "WS50") {
+        if (Build.MODEL == "WS50" && intent.getBooleanExtra(USE_LEDS, true)) {
             val intent =
                 Intent().setComponent(ComponentName("com.zebra.led", "com.zebra.led.LedService"))
             bindService(intent, ledConnection, BIND_AUTO_CREATE)
@@ -113,6 +113,7 @@ class MainActivity : AppCompatActivity() {
             if (product == null) {
                 showErrorSnackBar()
             } else {
+                binding.barcodeInfoContainer.visibility = View.VISIBLE
                 binding.productNumber.text = product.number.toString()
                 binding.productName.text = product.name
                 binding.productDescription.text = product.description
@@ -124,5 +125,6 @@ class MainActivity : AppCompatActivity() {
 
     companion object {
         const val TAG = "MainActivity"
+        const val USE_LEDS = "com.zebra.nilac.csvbarcodelookup.ui.main.USE_LEDS"
     }
 }

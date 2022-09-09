@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
     android:fitsSystemWindows="true"
     tools:context=".ui.main.MainActivity">
 
@@ -15,44 +14,92 @@
         android:layout_gravity="center"
         android:gravity="center"
         android:text="@string/main_screen_welcome_text"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
+        android:textSize="20sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:visibility="gone" />
 
     <LinearLayout
         android:id="@+id/barcode_info_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
         android:orientation="vertical"
-        android:padding="@dimen/def_half_half_margin">
+        android:padding="@dimen/def_half_half_margin"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible">
 
-        <TextView
-            android:id="@+id/product_number"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/white"
-            android:textSize="30sp"
-            tools:text="22" />
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/product_name"
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/product_number_label"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/product_number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="30sp"
+                tools:text="22" />
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/def_half_half_margin"
-            android:textColor="@color/secondary_dark_color"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            tools:text="Internationaal/Oosters" />
+            android:layout_marginTop="12dp"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/product_description"
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/product_name_label"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/product_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/secondary_dark_color"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                tools:text="Internationaal/Oosters" />
+
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/def_half_half_margin"
-            android:textColor="@color/white"
-            android:textSize="22sp"
-            tools:text="ah macaroni vlugkokend" />
+            android:layout_marginTop="12dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/product_description_label"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/product_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="22sp"
+                tools:text="ah macaroni vlugkokend" />
+
+        </LinearLayout>
 
     </LinearLayout>
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
