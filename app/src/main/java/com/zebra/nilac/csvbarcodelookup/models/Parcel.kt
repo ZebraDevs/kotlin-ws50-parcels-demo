@@ -9,27 +9,21 @@ import com.squareup.moshi.JsonClass
 import kotlinx.parcelize.Parcelize
 
 @JsonClass(generateAdapter = true)
-@Entity(tableName = "products")
+@Entity(tableName = "parcels")
 @Parcelize
-data class Product(
+data class Parcel(
 
-    @ColumnInfo(name = "COLLO_EAN")
-    var barcode: String = "",
+    @ColumnInfo(name = "PARCEL_BARCODE")
+    var parcelBarcode: String = "",
 
-    @ColumnInfo(name = "Vulpad_naam")
-    var name: String = "",
-
-    @ColumnInfo(name = "Vulpad_nummer")
-    var number: Int = 0,
-
-    @ColumnInfo(name = "OMSCHRIJVING")
-    var description: String = "",
+    @ColumnInfo(name = "CONTAINER")
+    var assignedContainer: String = "",
 ) : Parcelable {
 
     @PrimaryKey(autoGenerate = true)
     var id: Long = 0L
 
     override fun toString(): String {
-        return """Name: ${name} Description: ${description} Barcode: $barcode  Number: $number"""
+        return """Parcel Barcode: $parcelBarcode Assigned Container: $assignedContainer"""
     }
 }

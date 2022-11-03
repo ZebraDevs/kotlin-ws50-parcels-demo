@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/parcel_barcode_scan_fragment">
+
+    <fragment
+        android:id="@+id/parcel_barcode_scan_fragment"
+        android:name="com.zebra.nilac.csvbarcodelookup.ui.ParcelBarcodeScanFragment"
+        tools:layout="@layout/fragment_parcel_barcode_scan">
+
+        <action
+            android:id="@+id/action_go_to_container_confirmation_fragment"
+            app:destination="@id/container_confirmation_fragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/container_confirmation_fragment"
+        android:name="com.zebra.nilac.csvbarcodelookup.ui.ContainerConfirmationFragment"
+        tools:layout="@layout/fragment_container_confirmation">
+
+        <action
+            android:id="@+id/action_go_back_to_parcel_barcode_scan_fragment"
+            app:destination="@id/parcel_barcode_scan_fragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out" />
+
+        <argument
+            android:name="RetrievedParcel"
+            app:argType="com.zebra.nilac.csvbarcodelookup.models.Parcel" />
+    </fragment>
+</navigation>

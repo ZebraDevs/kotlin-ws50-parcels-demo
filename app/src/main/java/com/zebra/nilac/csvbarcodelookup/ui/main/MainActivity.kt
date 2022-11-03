@@ -4,29 +4,31 @@ import android.content.*
 import android.graphics.Color
 import android.os.*
 import android.util.Log
-import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
+import androidx.navigation.NavController
+import androidx.navigation.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.zebra.led.ILed
 import com.zebra.led.ILed.LED_LEFT
 import com.zebra.led.ILed.LED_RIGHT
 import com.zebra.nilac.csvbarcodelookup.AppConstants
-import com.zebra.nilac.csvbarcodelookup.DefaultApplication
 import com.zebra.nilac.csvbarcodelookup.R
 import com.zebra.nilac.csvbarcodelookup.databinding.ActivityMainBinding
-import com.zebra.nilac.csvbarcodelookup.models.Product
+import com.zebra.nilac.csvbarcodelookup.models.Parcel
+import com.zebra.nilac.csvbarcodelookup.InternalViewModel
+import com.zebra.nilac.csvbarcodelookup.models.Event
+import com.zebra.nilac.csvbarcodelookup.utils.BeepControllerUtil
 
-
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
-    private val mainViewModel: MainViewModel by viewModels()
-    private var mLedService: ILed? = null
+    private lateinit var mNavigationController: NavController
 
-    private var errorSnackbar: Snackbar? = null
+    private val internalParcelViewModel: InternalViewModel by viewModels()
+    private var mLedService: ILed? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,8 +36,19 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        mainViewModel.productResponse.observe(this, productObserver)
+        prepareUI()
+    }
 
+    override fun onBackPressed() {
+        finishAffinity()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        unbindService(ledConnection)
+    }
+
+    private fun prepareUI() {
         //Check if we're using the app on a WS50 for Led Capabilities
         if (Build.MODEL == "WS50" && intent.getBooleanExtra(USE_LEDS, true)) {
             val intent =
@@ -48,15 +61,19 @@ class MainActivity : AppCompatActivity() {
                 IntentFilter(AppConstants.DW_SCANNER_INTENT_ACTION)
             )
         }
+
+        mNavigationController = findNavController(R.id.nav_host_fragment_content_main)
+
+        //Start observing for parcel barcodes
+        internalParcelViewModel.parcelResponse.observe(this, parcelObserver)
     }
 
-    override fun onBackPressed() {
-        finishAffinity()
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        unbindService(ledConnection)
+    private fun goToContainerConfirmationScreen(parcel: Parcel) {
+        mNavigationController.navigate(
+            R.id.action_go_to_container_confirmation_fragment,
+            Bundle().apply {
+                putParcelable("RetrievedParcel", parcel)
+            })
     }
 
     private val scannerReceiver: BroadcastReceiver = object : BroadcastReceiver() {
@@ -64,7 +81,12 @@ class MainActivity : AppCompatActivity() {
             Log.d(TAG, "Received a DataWedge scanner intent: $intent")
 
             val barcode = intent.getStringExtra(AppConstants.DW_DATA_STRING_TAG)!!
-            mainViewModel.getProductByBarcode(barcode)
+
+            if (mNavigationController.currentDestination?.id == R.id.parcel_barcode_scan_fragment) {
+                internalParcelViewModel.getParcelByBarcode(barcode)
+            } else {
+                internalParcelViewModel.barcodeResponse.value = Event(barcode)
+            }
         }
     }
 
@@ -84,9 +106,24 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun updateLedStatus(isBadScan: Boolean) {
-        mLedService?.setLed(LED_RIGHT, if (isBadScan) Color.RED else Color.GREEN)
-        mLedService?.setLed(LED_LEFT, if (isBadScan) Color.RED else Color.GREEN)
+    private val parcelObserver: Observer<Parcel?> =
+        Observer { parcel ->
+            if (parcel == null) {
+                BeepControllerUtil(this).beep(false)
+                updateLedStatus(false)
+                showErrorDialog(getString(R.string.main_screen_barcode_scan_failed))
+            } else {
+                BeepControllerUtil(this).beep(true)
+                showSuccessDialog()
+                updateLedStatus(true)
+
+                goToContainerConfirmationScreen(parcel)
+            }
+        }
+
+    fun updateLedStatus(isGoodScan: Boolean) {
+        mLedService?.setLed(LED_RIGHT, if (isGoodScan) Color.GREEN else Color.RED)
+        mLedService?.setLed(LED_LEFT, if (isGoodScan) Color.GREEN else Color.RED)
 
         Handler(Looper.myLooper()!!).postDelayed({
             mLedService?.setLed(LED_RIGHT, Color.TRANSPARENT)
@@ -94,34 +131,9 @@ class MainActivity : AppCompatActivity() {
         }, 500L)
     }
 
-    private fun showErrorSnackBar() {
-        errorSnackbar =
-            Snackbar.make(
-                binding.root,
-                getString(R.string.main_screen_barcode_scan_failed),
-                Snackbar.LENGTH_INDEFINITE
-            ).also {
-                it.setBackgroundTint(getColor(R.color.secondary_color))
-                it.setTextColor(getColor(R.color.black))
-                it.show()
-            }
+    fun goBackToParcelBarcodeScanScreen() {
+        mNavigationController.popBackStack()
     }
-
-    private val productObserver: Observer<Product?> =
-        Observer { product ->
-            binding.genericStartMessage.visibility = View.GONE
-            if (product == null) {
-                showErrorSnackBar()
-            } else {
-                binding.barcodeInfoContainer.visibility = View.VISIBLE
-                binding.productNumber.text = product.number.toString()
-                binding.productName.text = product.name
-                binding.productDescription.text = product.description
-
-                errorSnackbar?.dismiss()
-            }
-            updateLedStatus(product == null)
-        }
 
     companion object {
         const val TAG = "MainActivity"

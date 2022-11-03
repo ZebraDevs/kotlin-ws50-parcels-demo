@@ -4,13 +4,13 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.zebra.nilac.csvbarcodelookup.dao.ProductsDao
-import com.zebra.nilac.csvbarcodelookup.models.Product
+import com.zebra.nilac.csvbarcodelookup.dao.ParcelDao
+import com.zebra.nilac.csvbarcodelookup.models.Parcel
 
-@Database(version = 2, entities = [Product::class], exportSchema = false)
+@Database(version = 2, entities = [Parcel::class], exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
 
-    abstract val productsDao: ProductsDao
+    abstract val parcelsDao: ParcelDao
 
     companion object {
         @Volatile
@@ -24,7 +24,7 @@ abstract class AppDatabase : RoomDatabase() {
                     instance = Room.databaseBuilder(
                         context,
                         AppDatabase::class.java,
-                        "products_db"
+                        "parcels_db"
                     )
                         .fallbackToDestructiveMigration()
                         .build()

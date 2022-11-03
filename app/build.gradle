@@ -11,8 +11,8 @@ android {
         applicationId "com.zebra.nilac.csvbarcodelookup"
         minSdk 30
         targetSdk 32
-        versionCode 1
-        versionName "1.0"
+        versionCode 120
+        versionName "1.2"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -23,6 +23,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -30,6 +31,7 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
     buildFeatures {
         viewBinding true
     }
@@ -55,7 +57,7 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.3.1"
 
     // EMDK Loader
-    implementation 'com.github.nilac8991:emdk-loader-lib:1.0.2'
+    implementation 'com.github.nilac8991:emdk-loader-lib:1.0.3'
 
     // EMDK
     implementation 'com.symbol:emdk:9.1.1'

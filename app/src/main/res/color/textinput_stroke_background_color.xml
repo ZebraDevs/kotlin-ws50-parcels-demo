@@ -1,0 +1,4 @@
+<selector xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingDefaultResource">
+    <item android:color="@color/secondary_color" android:state_focused="true" />
+    <item android:color="@color/light_gray" />
+</selector>

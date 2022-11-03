@@ -7,7 +7,7 @@ import com.opencsv.CSVReader
 import com.opencsv.CSVReaderBuilder
 import com.zebra.nilac.csvbarcodelookup.AppDatabase
 import com.zebra.nilac.csvbarcodelookup.DefaultApplication
-import com.zebra.nilac.csvbarcodelookup.models.Product
+import com.zebra.nilac.csvbarcodelookup.models.Parcel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
@@ -33,11 +33,10 @@ object ExcelDataExtractor {
         }
 
         val separator: CSVParser = CSVParserBuilder()
-            .withSeparator(',')
+            .withSeparator(';')
             .build()
 
         val reader: CSVReader = CSVReaderBuilder(FileReader(targetFile))
-            .withSkipLines(1)
             .withCSVParser(separator)
             .build()
 
@@ -47,30 +46,24 @@ object ExcelDataExtractor {
 
         MainScope().launch(Dispatchers.IO) {
             //Clean all records first
-            database?.productsDao!!.cleanAll()
+            database?.parcelsDao!!.cleanAll()
 
             try {
                 while (reader.readNext().also { nextCell = it } != null) {
-                    val product: Product = Product()
+                    val parcel: Parcel = Parcel()
 
                     if (nextCell.isNullOrEmpty()) {
                         break
                     }
 
                     //If the row doesn't contain the barcode, skip it...
-                    if (nextCell!![3].isEmpty()) {
+                    if (nextCell!![0].isEmpty()) {
                         continue
                     }
 
-                    product.description = nextCell!![2]
-                    product.barcode = nextCell!![3]
-                    product.name = nextCell!![5]
-                    product.number = try {
-                        nextCell!![6].toInt()
-                    } catch (ex: NumberFormatException) {
-                        0
-                    }
-                    pourDataToLocalDb(product)
+                    parcel.parcelBarcode = nextCell!![0]
+                    parcel.assignedContainer = nextCell!![1]
+                    pourDataToLocalDb(parcel)
                 }
                 mCallBacks?.onFinished()
             } catch (ex: Exception) {
@@ -80,11 +73,11 @@ object ExcelDataExtractor {
         }
     }
 
-    private fun pourDataToLocalDb(product: Product) {
-        Log.d(TAG, "Pouring new product into DB with info:\n ${product.toString()}")
+    private fun pourDataToLocalDb(parcel: Parcel) {
+        Log.d(TAG, "Pouring new parcel into DB with info:\n ${parcel.toString()}")
 
         //Pour extracted product into our DB
-        database?.productsDao!!.insertNewProduct(product)
+        database?.parcelsDao!!.insertNewParcel(parcel)
     }
 
     interface CallBacks {
