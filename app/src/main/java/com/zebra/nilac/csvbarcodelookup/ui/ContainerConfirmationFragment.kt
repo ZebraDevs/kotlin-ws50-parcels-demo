@@ -8,6 +8,10 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
+import android.widget.TextView
+import androidx.core.view.marginEnd
+import androidx.core.view.updateLayoutParams
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -63,31 +67,24 @@ class ContainerConfirmationFragment : Fragment() {
     private fun fillUI() {
         binding.containerToScanTxtTitle.text = mParcel.assignedContainer
 
-        when (mParcel.assignedContainer.substring(mParcel.assignedContainer.length - 2)) {
-            Container.A1.name -> {
-                binding.locationA1.apply {
-                    setBackgroundResource(R.drawable.container_animation)
-                    containerAnimation = background as AnimationDrawable
+        //Load all the available container locations defined by the user
+
+        //TO-BE-REMOVED
+        val locations = arrayListOf("A1", "A2", "A3", "A4", "A5", "A6", "A7", "A8")
+
+        for (i in 0 until locations.size) {
+            val location = locations[i]
+            val containerView =
+                layoutInflater.inflate(R.layout.generic_location_container, null).apply {
+                    findViewById<TextView>(R.id.location).apply {
+                        text = location
+                        if (mParcel.assignedContainer.contains(location)) {
+                            setBackgroundResource(R.drawable.container_animation)
+                            containerAnimation = background as AnimationDrawable
+                        }
+                    }
                 }
-            }
-            Container.A2.name -> {
-                binding.locationA2.apply {
-                    setBackgroundResource(R.drawable.container_animation)
-                    containerAnimation = background as AnimationDrawable
-                }
-            }
-            Container.A3.name -> {
-                binding.locationA3.apply {
-                    setBackgroundResource(R.drawable.container_animation)
-                    containerAnimation = background as AnimationDrawable
-                }
-            }
-            Container.A4.name -> {
-                binding.locationA4.apply {
-                    setBackgroundResource(R.drawable.container_animation)
-                    containerAnimation = background as AnimationDrawable
-                }
-            }
+            binding.containers.addView(containerView)
         }
         containerAnimation.start()
     }

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:maxWidth="45dp">
+
+    <TextView
+        android:id="@+id/location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/filled_box_background"
+        android:fontFamily="sans-serif-medium"
+        android:paddingStart="@dimen/def_half_half_margin"
+        android:paddingTop="@dimen/def_quad_margin"
+        android:paddingEnd="@dimen/def_half_half_margin"
+        android:paddingBottom="@dimen/def_quad_margin"
+        android:text="A4"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="9pt" />
+</LinearLayout>

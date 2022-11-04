@@ -26,7 +26,7 @@
             android:gravity="center"
             android:text="SORT TO CONTAINER"
             android:textColor="@color/black"
-            android:textSize="9.5pt" />
+            android:textSize="9pt" />
 
         <TextView
             android:id="@+id/container_to_scan_txt_title"
@@ -35,7 +35,7 @@
             android:fontFamily="sans-serif-medium"
             android:textAlignment="center"
             android:textColor="@color/black"
-            android:textSize="9.5pt"
+            android:textSize="9pt"
             tools:text="A1" />
 
     </LinearLayout>
@@ -46,71 +46,17 @@
         android:baselineAligned="false"
         android:orientation="vertical">
 
-        <LinearLayout
+        <GridLayout
             android:id="@+id/containers"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="@dimen/def_half_half_margin"
+            android:columnCount="4"
             android:gravity="center"
             android:orientation="horizontal"
             android:padding="@dimen/def_half_half_margin"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <TextView
-                android:id="@+id/location_a4"
-                android:layout_width="45dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/def_half_half_margin"
-                android:background="@drawable/filled_box_background"
-                android:fontFamily="sans-serif-medium"
-                android:padding="@dimen/def_quad_margin"
-                android:text="A4"
-                android:textAlignment="center"
-                android:textColor="@color/white"
-                android:textSize="9pt" />
-
-            <TextView
-                android:id="@+id/location_a3"
-                android:layout_width="45dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/def_half_half_margin"
-                android:background="@drawable/filled_box_background"
-                android:fontFamily="sans-serif-medium"
-                android:padding="@dimen/def_quad_margin"
-                android:text="A3"
-                android:textAlignment="center"
-                android:textColor="@color/white"
-                android:textSize="9pt" />
-
-            <TextView
-                android:id="@+id/location_a2"
-                android:layout_width="45dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/def_half_half_margin"
-                android:background="@drawable/filled_box_background"
-                android:fontFamily="sans-serif-medium"
-                android:padding="@dimen/def_quad_margin"
-                android:text="A2"
-                android:textAlignment="center"
-                android:textColor="@color/white"
-                android:textSize="9pt" />
-
-            <TextView
-                android:id="@+id/location_a1"
-                android:layout_width="45dp"
-                android:layout_height="wrap_content"
-                android:background="@drawable/filled_box_background"
-                android:fontFamily="sans-serif-medium"
-                android:padding="@dimen/def_quad_margin"
-                android:text="A1"
-                android:textAlignment="center"
-                android:textColor="@color/white"
-                android:textSize="9pt"
-                tools:background="@drawable/filled_container_background" />
-
-        </LinearLayout>
+            android:useDefaultMargins="true" />
 
         <LinearLayout
             android:id="@+id/info_container"
@@ -127,7 +73,7 @@
                 android:gravity="center"
                 android:text="SCAN CONTAINER\nTO CONFIRM"
                 android:textColor="@color/white"
-                android:textSize="10pt" />
+                android:textSize="8pt" />
 
         </LinearLayout>
     </LinearLayout>
