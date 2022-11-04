@@ -5,15 +5,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:padding="10dp"
     tools:background="@color/splash_background">
 
     <ProgressBar
         android:id="@+id/loading_spinner"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:layout_gravity="center"
+        android:layout_marginTop="@dimen/def_half_margin"
         android:indeterminate="true"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -22,18 +23,19 @@
         android:id="@+id/loading_status_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/def_half_margin"
+        android:layout_marginTop="@dimen/def_half_half_margin"
         android:gravity="center"
         android:textColor="@color/white"
-        android:textSize="20sp"
+        android:textSize="16sp"
         app:layout_constraintTop_toBottomOf="@id/loading_spinner"
-        tools:text="Checking EMDK..." />
+        tools:text="@string/init_process_load_csv_data_not_found" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/csv_import_retry_button"
         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/def_quad_margin"
         android:text="Retry"
         android:textColor="@color/secondary_color"
         android:visibility="gone"
