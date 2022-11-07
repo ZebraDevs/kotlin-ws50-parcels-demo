@@ -13,7 +13,7 @@
 
     <string name="init_process_load_csv_data">Importing CSV Data from file…</string>
     <string name="init_process_load_csv_data_not_found">No CSV file was found at the required location, please add it and click retry</string>
-    <string name="init_process_load_csv_data_failed">Failed to load data from CSV file: %s</string>
+    <string name="init_process_load_csv_data_failed">Failed to import data: %s</string>
     <string name="init_process_load_csv_data_success">Successfully loaded data from CSV file</string>
 
     <string name="main_screen_welcome_text">Scan a barcode to start!</string>

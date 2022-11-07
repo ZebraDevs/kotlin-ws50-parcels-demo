@@ -11,16 +11,10 @@ import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
-import com.symbol.emdk.EMDKResults
 import com.zebra.nilac.csvbarcodelookup.*
 import com.zebra.nilac.csvbarcodelookup.ui.main.MainActivity
 import com.zebra.nilac.csvbarcodelookup.databinding.ActivityInitBinding
-import com.zebra.nilac.csvbarcodelookup.utils.ExcelDataExtractor
-import com.zebra.nilac.emdkloader.EMDKLoader
-import com.zebra.nilac.emdkloader.ProfileLoader
-import com.zebra.nilac.emdkloader.interfaces.EMDKManagerInitCallBack
-import com.zebra.nilac.emdkloader.interfaces.ProfileLoaderResultCallback
-import java.io.File
+import com.zebra.nilac.csvbarcodelookup.models.DataImportObject
 
 class InitActivity : AppCompatActivity() {
 
@@ -39,7 +33,6 @@ class InitActivity : AppCompatActivity() {
         Log.i(TAG, "Initialising Application...")
         mBinder.loadingStatusText.text = getString(R.string.init_screen_emdk_check)
 
-        initViewModel.isDbEmpty.observe(this, databaseObserver)
         initViewModel.isPermissionGranted.observe(this, storagePermissionObserver)
         initViewModel.isDWProfileGenerated.observe(this, dwProfileObserver)
         initViewModel.isDataImported.observe(this, dataImportObserver)
@@ -61,7 +54,7 @@ class InitActivity : AppCompatActivity() {
                         bundle.getString("PROFILE_NAME") != null
                     ) {
                         Log.i(TAG, "DW Profile already exists, skipping creation part")
-                        checkDb()
+                        initViewModel.importData()
                     } else {
                         Log.w(
                             TAG,
@@ -91,10 +84,6 @@ class InitActivity : AppCompatActivity() {
         sendBroadcast(dwIntent)
     }
 
-    private fun checkDb() {
-        initViewModel.isDbEmpty()
-    }
-
     private val storagePermissionObserver: Observer<Boolean> =
         Observer<Boolean> { isGranted ->
             if (isGranted && Environment.isExternalStorageManager()) {
@@ -112,54 +101,23 @@ class InitActivity : AppCompatActivity() {
             if (isGenerated) {
                 mBinder.loadingStatusText.text =
                     getString(R.string.init_process_dw_profile_success)
-                checkDb()
+                initViewModel.importData()
             } else {
                 mBinder.loadingStatusText.text =
                     getString(R.string.init_process_dw_profile_failed)
             }
         }
 
-    private val dataImportObserver: Observer<Boolean> =
-        Observer { isImported ->
-            if (isImported) {
+    private val dataImportObserver: Observer<DataImportObject> =
+        Observer { importObject ->
+            if (importObject.isCSVDataImported && importObject.isContainerLocationsImported) {
                 finish()
                 startActivity(Intent(this@InitActivity, MainActivity::class.java))
             } else {
                 mBinder.loadingStatusText.text =
-                    getString(R.string.init_process_load_csv_data_failed)
+                    getString(R.string.init_process_load_csv_data_failed, importObject.errorMessage)
             }
         }
-
-    private val databaseObserver = Observer<Boolean> { isEmpty ->
-        if (!AppConstants.CSV_FILE_PATH.exists() && isEmpty) {
-            Log.w(
-                TAG,
-                "No CSV File found at specified destination and DB is empty, waiting for user input"
-            )
-
-            mBinder.loadingStatusText.text =
-                getString(R.string.init_process_load_csv_data_not_found)
-
-            mBinder.csvImportRetryButton.apply {
-                visibility = View.VISIBLE
-                setOnClickListener {
-                    visibility = View.GONE
-                    checkDb()
-                }
-            }
-        } else if (!AppConstants.CSV_FILE_PATH.exists()) {
-            Log.i(
-                TAG,
-                "No CSV File found at specified destination, assuming there's nothing to update!"
-            )
-            finish()
-            startActivity(Intent(this@InitActivity, MainActivity::class.java))
-        } else {
-            mBinder.loadingStatusText.text =
-                getString(R.string.init_process_load_csv_data)
-            initViewModel.importCsvData()
-        }
-    }
 
     companion object {
         const val TAG = "InitActivity"

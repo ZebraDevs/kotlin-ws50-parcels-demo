@@ -22,6 +22,7 @@ import com.zebra.nilac.csvbarcodelookup.models.Event
 import com.zebra.nilac.csvbarcodelookup.models.Parcel
 import com.zebra.nilac.csvbarcodelookup.ui.main.MainActivity
 import com.zebra.nilac.csvbarcodelookup.utils.BeepControllerUtil
+import com.zebra.nilac.csvbarcodelookup.utils.ContainerLocationsExtractor
 
 class ContainerConfirmationFragment : Fragment() {
 
@@ -68,12 +69,9 @@ class ContainerConfirmationFragment : Fragment() {
         binding.containerToScanTxtTitle.text = mParcel.assignedContainer
 
         //Load all the available container locations defined by the user
+        val locations = ContainerLocationsExtractor.getLocations()
 
-        //TO-BE-REMOVED
-        val locations = arrayListOf("A1", "A2", "A3", "A4", "A5", "A6", "A7", "A8")
-
-        for (i in 0 until locations.size) {
-            val location = locations[i]
+        for (location in locations) {
             val containerView =
                 layoutInflater.inflate(R.layout.generic_location_container, null).apply {
                     findViewById<TextView>(R.id.location).apply {
