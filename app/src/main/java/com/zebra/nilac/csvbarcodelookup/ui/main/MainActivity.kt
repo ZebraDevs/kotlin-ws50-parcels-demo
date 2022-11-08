@@ -5,21 +5,20 @@ import android.graphics.Color
 import android.os.*
 import android.util.Log
 import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
-import com.google.android.material.snackbar.Snackbar
 import com.zebra.led.ILed
 import com.zebra.led.ILed.LED_LEFT
 import com.zebra.led.ILed.LED_RIGHT
 import com.zebra.nilac.csvbarcodelookup.AppConstants
+import com.zebra.nilac.csvbarcodelookup.InternalViewModel
 import com.zebra.nilac.csvbarcodelookup.R
 import com.zebra.nilac.csvbarcodelookup.databinding.ActivityMainBinding
-import com.zebra.nilac.csvbarcodelookup.models.Parcel
-import com.zebra.nilac.csvbarcodelookup.InternalViewModel
 import com.zebra.nilac.csvbarcodelookup.models.Event
+import com.zebra.nilac.csvbarcodelookup.models.Parcel
 import com.zebra.nilac.csvbarcodelookup.utils.BeepControllerUtil
+
 
 class MainActivity : BaseActivity() {
 
@@ -37,10 +36,6 @@ class MainActivity : BaseActivity() {
         setContentView(binding.root)
 
         prepareUI()
-    }
-
-    override fun onBackPressed() {
-        finishAffinity()
     }
 
     override fun onDestroy() {
@@ -131,7 +126,23 @@ class MainActivity : BaseActivity() {
         }, 500L)
     }
 
+    fun goToParcelBarcodeScanFragment() {
+        mNavigationController.navigate(
+            R.id.action_go_to_parcel_barcode_scan_fragment
+        )
+    }
+
+    fun goToSettingsFragment() {
+        mNavigationController.navigate(
+            R.id.action_go_to_settings_fragment
+        )
+    }
+
     fun goBackToParcelBarcodeScanScreen() {
+        mNavigationController.popBackStack()
+    }
+
+    fun goBackToDashboard() {
         mNavigationController.popBackStack()
     }
 

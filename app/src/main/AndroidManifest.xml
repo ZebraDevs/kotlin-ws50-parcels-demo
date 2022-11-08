@@ -32,13 +32,6 @@
         </activity>
 
         <activity
-            android:name=".ui.main.SettingsActivity"
-            android:exported="true"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.CSVBarcodeLookup.Settings"
-            tools:ignore="LockedOrientationActivity" />
-
-        <activity
             android:name=".ui.main.MainActivity"
             android:exported="true"
             android:screenOrientation="portrait"

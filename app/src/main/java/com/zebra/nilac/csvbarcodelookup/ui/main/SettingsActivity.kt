@@ -1,41 +1,65 @@
 package com.zebra.nilac.csvbarcodelookup.ui.main
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import com.zebra.nilac.csvbarcodelookup.R
-import com.zebra.nilac.csvbarcodelookup.databinding.ActivitySettingsBinding
+import com.zebra.nilac.csvbarcodelookup.databinding.FragmentDashboardBinding
+import com.zebra.nilac.csvbarcodelookup.databinding.FragmentSettingsBinding
 
-class SettingsActivity : AppCompatActivity() {
+class SettingsActivity : Fragment() {
 
-    private lateinit var mBinder: ActivitySettingsBinding
+    private var mBinder: FragmentSettingsBinding? = null
+    private val binding get() = mBinder!!
+
+    private lateinit var mContext: Context
+    private lateinit var mActivity: MainActivity
 
     private var mAimTypePosition = 3
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        mBinder = ActivitySettingsBinding.inflate(layoutInflater)
-        setContentView(mBinder.root)
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
 
+        mContext = context
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+
+        mBinder = FragmentSettingsBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        mActivity = requireActivity() as MainActivity
         prepareUI()
     }
 
     private fun prepareUI() {
         val aimModesAdapter: ArrayAdapter<String> = ArrayAdapter(
-            this,
+            mContext,
             android.R.layout.simple_dropdown_item_1line,
             resources.getStringArray(R.array.aim_modes)
         )
 
-        mBinder.inputAimType.setAdapter(aimModesAdapter)
-        mBinder.inputAimType.onItemClickListener =
+        binding.inputAimType.setAdapter(aimModesAdapter)
+        binding.inputAimType.onItemClickListener =
             AdapterView.OnItemClickListener { parent, view, position, id ->
                 mAimTypePosition = resources.getIntArray(R.array.aim_modes_t)[position]
             }
 
-        mBinder.continueButton.setOnClickListener {
+        binding.continueButton.setOnClickListener {
             sendDWConfigurations()
         }
     }
@@ -51,11 +75,11 @@ class SettingsActivity : AppCompatActivity() {
             putString("aim_type", mAimTypePosition.toString())
             putString("scanner_selection_by_identifier", "INTERNAL_IMAGER");
             putString("scanner_input_enabled", "true");
-            if (mBinder.inputSameBarcodeTimeout.text.isNotEmpty()) {
-                putString("same_barcode_timeout", mBinder.inputSameBarcodeTimeout.text.toString())
+            if (binding.inputSameBarcodeTimeout.text.isNotEmpty()) {
+                putString("same_barcode_timeout", binding.inputSameBarcodeTimeout.text.toString())
             }
-            if (mBinder.inputAimTimer.text.isNotEmpty()) {
-                putString("aim_timer", mBinder.inputAimTimer.text.toString())
+            if (binding.inputAimTimer.text.isNotEmpty()) {
+                putString("aim_timer", binding.inputAimTimer.text.toString())
             }
         }
 
@@ -70,13 +94,12 @@ class SettingsActivity : AppCompatActivity() {
             action = "com.symbol.datawedge.api.ACTION"
             putExtra("com.symbol.datawedge.api.SET_CONFIG", bMain)
         }
-        this.sendBroadcast(i)
+        mContext.sendBroadcast(i)
 
-        val mainActivityIntent = Intent(this, MainActivity::class.java).apply {
-            putExtra(MainActivity.USE_LEDS, mBinder.useLedsChoiceYesRadio.isChecked)
-        }
+//        val mainActivityIntent = Intent(mContext, MainActivity::class.java).apply {
+//            putExtra(MainActivity.USE_LEDS, binding.useLedsChoiceYesRadio.isChecked)
+//        }
 
-        finish()
-        startActivity(mainActivityIntent)
+        mActivity.goBackToDashboard()
     }
 }

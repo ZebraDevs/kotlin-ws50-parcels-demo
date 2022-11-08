@@ -8,6 +8,10 @@
         <entry key="app/src/main/res/drawable/ic_box.xml" value="0.2085" />
         <entry key="app/src/main/res/drawable/ic_generic_check.xml" value="0.2085" />
         <entry key="app/src/main/res/drawable/ic_generic_error.xml" value="0.2085" />
+        <entry key="app/src/main/res/drawable/ic_generic_report.xml" value="0.3285" />
+        <entry key="app/src/main/res/drawable/ic_generic_scan.xml" value="0.3285" />
+        <entry key="app/src/main/res/drawable/ic_generic_settings.xml" value="0.3285" />
+        <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.3285" />
         <entry key="app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.2085" />
         <entry key="app/src/main/res/drawable/outlined_box_background.xml" value="0.3285" />
         <entry key="app/src/main/res/drawable/textinput_stroke_background_color.xml" value="0.3285" />
@@ -24,6 +28,7 @@
         <entry key="app/src/main/res/layout/dialog_error.xml" value="0.19628286491387126" />
         <entry key="app/src/main/res/layout/dialog_success.xml" value="0.19628286491387126" />
         <entry key="app/src/main/res/layout/fragment_container_confirmation.xml" value="0.625" />
+        <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.5" />
         <entry key="app/src/main/res/layout/fragment_parcel_barcode_scan.xml" value="0.45" />
         <entry key="app/src/main/res/layout/generic_container.xml" value="0.3056861906797777" />
         <entry key="app/src/main/res/layout/generic_location_container.xml" value="0.75" />

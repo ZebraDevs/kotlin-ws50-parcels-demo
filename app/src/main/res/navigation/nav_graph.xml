@@ -3,7 +3,30 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/parcel_barcode_scan_fragment">
+    app:startDestination="@id/dashboard_fragment">
+
+    <fragment
+        android:id="@+id/dashboard_fragment"
+        android:name="com.zebra.nilac.csvbarcodelookup.ui.DashboardFragment"
+        tools:layout="@layout/fragment_dashboard">
+
+        <action
+            android:id="@+id/action_go_to_parcel_barcode_scan_fragment"
+            app:destination="@id/parcel_barcode_scan_fragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out" />
+
+        <action
+            android:id="@+id/action_go_to_settings_fragment"
+            app:destination="@id/settings_fragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/settings_fragment"
+        android:name="com.zebra.nilac.csvbarcodelookup.ui.main.SettingsActivity"
+        tools:layout="@layout/fragment_settings" />
 
     <fragment
         android:id="@+id/parcel_barcode_scan_fragment"
@@ -14,9 +37,7 @@
             android:id="@+id/action_go_to_container_confirmation_fragment"
             app:destination="@id/container_confirmation_fragment"
             app:enterAnim="@anim/fade_in"
-            app:exitAnim="@anim/fade_out"
-            app:popEnterAnim="@anim/fade_in"
-            app:popExitAnim="@anim/fade_out" />
+            app:exitAnim="@anim/fade_out" />
     </fragment>
 
     <fragment
@@ -28,9 +49,7 @@
             android:id="@+id/action_go_back_to_parcel_barcode_scan_fragment"
             app:destination="@id/parcel_barcode_scan_fragment"
             app:enterAnim="@anim/fade_in"
-            app:exitAnim="@anim/fade_out"
-            app:popEnterAnim="@anim/fade_in"
-            app:popExitAnim="@anim/fade_out" />
+            app:exitAnim="@anim/fade_out" />
 
         <argument
             android:name="RetrievedParcel"
