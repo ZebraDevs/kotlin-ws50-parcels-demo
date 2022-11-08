@@ -25,12 +25,12 @@
 
     <fragment
         android:id="@+id/settings_fragment"
-        android:name="com.zebra.nilac.csvbarcodelookup.ui.main.SettingsActivity"
+        android:name="com.zebra.nilac.csvbarcodelookup.ui.SettingsFragment"
         tools:layout="@layout/fragment_settings" />
 
     <fragment
         android:id="@+id/parcel_barcode_scan_fragment"
-        android:name="com.zebra.nilac.csvbarcodelookup.ui.ParcelBarcodeScanFragment"
+        android:name="com.zebra.nilac.csvbarcodelookup.ui.operation.ParcelBarcodeScanFragment"
         tools:layout="@layout/fragment_parcel_barcode_scan">
 
         <action
@@ -42,7 +42,7 @@
 
     <fragment
         android:id="@+id/container_confirmation_fragment"
-        android:name="com.zebra.nilac.csvbarcodelookup.ui.ContainerConfirmationFragment"
+        android:name="com.zebra.nilac.csvbarcodelookup.ui.operation.ContainerConfirmationFragment"
         tools:layout="@layout/fragment_container_confirmation">
 
         <action

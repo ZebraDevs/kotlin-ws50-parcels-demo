@@ -1,4 +1,4 @@
-package com.zebra.nilac.csvbarcodelookup.ui
+package com.zebra.nilac.csvbarcodelookup.ui.operation
 
 import android.content.Context
 import android.os.Bundle

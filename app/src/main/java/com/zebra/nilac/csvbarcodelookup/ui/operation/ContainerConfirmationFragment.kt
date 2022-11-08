@@ -1,23 +1,18 @@
-package com.zebra.nilac.csvbarcodelookup.ui
+package com.zebra.nilac.csvbarcodelookup.ui.operation
 
 import android.content.Context
-import android.content.Intent
 import android.graphics.drawable.AnimationDrawable
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.core.view.marginEnd
-import androidx.core.view.updateLayoutParams
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.zebra.nilac.csvbarcodelookup.*
 import com.zebra.nilac.csvbarcodelookup.databinding.FragmentContainerConfirmationBinding
-import com.zebra.nilac.csvbarcodelookup.models.Container
 import com.zebra.nilac.csvbarcodelookup.models.Event
 import com.zebra.nilac.csvbarcodelookup.models.Parcel
 import com.zebra.nilac.csvbarcodelookup.ui.main.MainActivity

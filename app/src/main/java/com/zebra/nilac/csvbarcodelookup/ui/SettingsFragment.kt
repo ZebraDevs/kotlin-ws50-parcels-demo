@@ -1,4 +1,4 @@
-package com.zebra.nilac.csvbarcodelookup.ui.main
+package com.zebra.nilac.csvbarcodelookup.ui
 
 import android.content.Context
 import android.content.Intent
@@ -8,13 +8,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.zebra.nilac.csvbarcodelookup.R
-import com.zebra.nilac.csvbarcodelookup.databinding.FragmentDashboardBinding
 import com.zebra.nilac.csvbarcodelookup.databinding.FragmentSettingsBinding
+import com.zebra.nilac.csvbarcodelookup.ui.main.MainActivity
 
-class SettingsActivity : Fragment() {
+class SettingsFragment : Fragment() {
 
     private var mBinder: FragmentSettingsBinding? = null
     private val binding get() = mBinder!!
