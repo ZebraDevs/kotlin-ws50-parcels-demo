@@ -5,12 +5,16 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.zebra.nilac.csvbarcodelookup.dao.ParcelDao
+import com.zebra.nilac.csvbarcodelookup.dao.ReportDao
 import com.zebra.nilac.csvbarcodelookup.models.Parcel
+import com.zebra.nilac.csvbarcodelookup.models.StoredParcel
 
-@Database(version = 2, entities = [Parcel::class], exportSchema = false)
+@Database(version = 4, entities = [Parcel::class, StoredParcel::class], exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract val parcelsDao: ParcelDao
+
+    abstract val reportsDao: ReportDao
 
     companion object {
         @Volatile

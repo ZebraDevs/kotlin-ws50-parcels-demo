@@ -21,12 +21,23 @@
             app:destination="@id/settings_fragment"
             app:enterAnim="@anim/fade_in"
             app:exitAnim="@anim/fade_out" />
+
+        <action
+            android:id="@+id/action_go_to_reports_summary_fragment"
+            app:destination="@id/reports_summary_fragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out" />
     </fragment>
 
     <fragment
         android:id="@+id/settings_fragment"
         android:name="com.zebra.nilac.csvbarcodelookup.ui.SettingsFragment"
         tools:layout="@layout/fragment_settings" />
+
+    <fragment
+        android:id="@+id/reports_summary_fragment"
+        android:name="com.zebra.nilac.csvbarcodelookup.ui.reports.ReportsSummaryFragment"
+        tools:layout="@layout/fragment_report_containers_overview" />
 
     <fragment
         android:id="@+id/parcel_barcode_scan_fragment"

@@ -138,6 +138,12 @@ class MainActivity : BaseActivity() {
         )
     }
 
+    fun goToReportsSummaryFragment() {
+        mNavigationController.navigate(
+            R.id.action_go_to_reports_summary_fragment
+        )
+    }
+
     fun goBackToParcelBarcodeScanScreen() {
         mNavigationController.popBackStack()
     }

@@ -45,5 +45,9 @@ class DashboardFragment : Fragment() {
         binding.settingsEntry.setOnClickListener {
             mActivity.goToSettingsFragment()
         }
+
+        binding.reportsEntry.setOnClickListener {
+            mActivity.goToReportsSummaryFragment()
+        }
     }
 }

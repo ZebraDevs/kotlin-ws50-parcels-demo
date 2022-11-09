@@ -30,8 +30,11 @@
         <entry key="app/src/main/res/layout/fragment_container_confirmation.xml" value="0.625" />
         <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.5" />
         <entry key="app/src/main/res/layout/fragment_parcel_barcode_scan.xml" value="0.45" />
+        <entry key="app/src/main/res/layout/fragment_report_containers_overview.xml" value="0.5" />
         <entry key="app/src/main/res/layout/generic_container.xml" value="0.3056861906797777" />
         <entry key="app/src/main/res/layout/generic_location_container.xml" value="0.75" />
+        <entry key="app/src/main/res/layout/report_container_parcels_count_row.xml" value="0.45" />
+        <entry key="app/src/main/res/layout/report_containers_overview.xml" value="0.5" />
         <entry key="app/src/main/res/menu/nav_graph.xml" value="0.22958529286019666" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.2085" />
       </map>
@@ -42,5 +45,12 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.17870884993587002" />
+      </ProjectState>
+    </option>
   </component>
 </project>

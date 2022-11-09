@@ -15,6 +15,7 @@ import com.zebra.nilac.csvbarcodelookup.*
 import com.zebra.nilac.csvbarcodelookup.databinding.FragmentContainerConfirmationBinding
 import com.zebra.nilac.csvbarcodelookup.models.Event
 import com.zebra.nilac.csvbarcodelookup.models.Parcel
+import com.zebra.nilac.csvbarcodelookup.models.StoredParcel
 import com.zebra.nilac.csvbarcodelookup.ui.main.MainActivity
 import com.zebra.nilac.csvbarcodelookup.utils.BeepControllerUtil
 import com.zebra.nilac.csvbarcodelookup.utils.ContainerLocationsExtractor
@@ -56,6 +57,10 @@ class ContainerConfirmationFragment : Fragment() {
         mParcel = requireArguments().getParcelable<Parcel>("RetrievedParcel")!!
 
         internalViewModel.barcodeResponse.observe(viewLifecycleOwner, barcodeObserver)
+        internalViewModel.parcelReportInsertionResponse.observe(
+            viewLifecycleOwner,
+            parcelReportInsertionObserver
+        )
 
         fillUI()
     }
@@ -84,6 +89,7 @@ class ContainerConfirmationFragment : Fragment() {
 
     private fun goBackToParcelBarcodeScanScreen() {
         internalViewModel.barcodeResponse.removeObservers(viewLifecycleOwner)
+        internalViewModel.parcelReportInsertionResponse.removeObservers(viewLifecycleOwner)
 
         mActivity.goBackToParcelBarcodeScanScreen()
     }
@@ -99,6 +105,23 @@ class ContainerConfirmationFragment : Fragment() {
             Log.d(TAG, "Received a DataWedge scanner intent: $barcode")
 
             if (barcode == mParcel.assignedContainer) {
+                internalViewModel.insertNewParcel(mParcel)
+            } else {
+                BeepControllerUtil(mContext).beep(false)
+
+                mActivity.updateLedStatus(false)
+                mActivity.showErrorDialog(
+                    "Wrong container!\n" +
+                            "Please put parcel to ${mParcel.assignedContainer.substring(mParcel.assignedContainer.length - 2)} and confirm"
+                )
+            }
+        }
+
+    private val parcelReportInsertionObserver: Observer<Event<Parcel>> =
+        Observer { storedParcelEvent ->
+            val storedParcel = storedParcelEvent.contentIfNotHandled ?: return@Observer
+
+            if (storedParcel.parcelBarcode != "") {
                 BeepControllerUtil(mContext).beep(true)
 
                 mActivity.updateLedStatus(true)
@@ -109,10 +132,7 @@ class ContainerConfirmationFragment : Fragment() {
                 BeepControllerUtil(mContext).beep(false)
 
                 mActivity.updateLedStatus(false)
-                mActivity.showErrorDialog(
-                    "Wrong container!\n" +
-                            "Please put parcel to ${mParcel.assignedContainer.substring(mParcel.assignedContainer.length - 2)} and confirm"
-                )
+                mActivity.showErrorDialog("Parcel was already stored in this location!")
             }
         }
 
