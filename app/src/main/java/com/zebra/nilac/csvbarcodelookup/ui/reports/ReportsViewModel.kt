@@ -5,13 +5,15 @@ import com.zebra.nilac.csvbarcodelookup.DefaultApplication
 import com.zebra.nilac.csvbarcodelookup.models.Event
 import com.zebra.nilac.csvbarcodelookup.models.Parcel
 import com.zebra.nilac.csvbarcodelookup.models.ReportContainer
+import com.zebra.nilac.csvbarcodelookup.models.StoredParcel
 import com.zebra.nilac.csvbarcodelookup.utils.ContainerLocationsExtractor
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class ReportsSummaryViewModel : ViewModel() {
+class ReportsViewModel : ViewModel() {
 
     private val reportsDao = DefaultApplication.getInstance().getAppDatabaseInstance().reportsDao
+    private var mScannedParcels: MutableList<StoredParcel> = ArrayList()
 
     val containerResponse: MutableLiveData<List<ReportContainer>> by lazy {
         MutableLiveData<List<ReportContainer>>()
@@ -21,12 +23,12 @@ class ReportsSummaryViewModel : ViewModel() {
         val locations = ContainerLocationsExtractor.getLocations()
 
         viewModelScope.launch(Dispatchers.IO) {
-            val parcels = reportsDao.getParcels()
+            mScannedParcels = reportsDao.getParcels().toMutableList()
             val reportLocations: MutableList<ReportContainer> = ArrayList()
 
             for (location in locations) {
                 val reportLocation = ReportContainer(location, 0)
-                for (parcel in parcels) {
+                for (parcel in mScannedParcels) {
                     if (parcel.assignedContainer == location) {
                         reportLocation.parcelsCount++
                     }
@@ -35,5 +37,12 @@ class ReportsSummaryViewModel : ViewModel() {
             }
             containerResponse.postValue(reportLocations)
         }
+    }
+
+    fun getScannedParcelsByContainer(containerName: String): ArrayList<StoredParcel> {
+        val filteredList = mScannedParcels.filter {
+            it.assignedContainer.equals(containerName, ignoreCase = true)
+        }.toMutableList()
+        return ArrayList(filteredList)
     }
 }

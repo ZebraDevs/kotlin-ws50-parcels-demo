@@ -1,7 +1,6 @@
 package com.zebra.nilac.csvbarcodelookup.ui.reports
 
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,16 +10,12 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.zebra.nilac.csvbarcodelookup.InternalViewModel
 import com.zebra.nilac.csvbarcodelookup.databinding.FragmentReportContainersOverviewBinding
-import com.zebra.nilac.csvbarcodelookup.databinding.FragmentSettingsBinding
 import com.zebra.nilac.csvbarcodelookup.models.ReportContainer
 import com.zebra.nilac.csvbarcodelookup.ui.main.MainActivity
 import com.zebra.nilac.csvbarcodelookup.ui.reports.adapters.ReportsSummaryListAdapter
-import com.zebra.nilac.csvbarcodelookup.utils.ContainerLocationsExtractor
 
-class ReportsSummaryFragment() : Fragment() {
+class ReportSummaryFragment() : Fragment() {
 
     private var mBinder: FragmentReportContainersOverviewBinding? = null
     private val binding get() = mBinder!!
@@ -30,7 +25,7 @@ class ReportsSummaryFragment() : Fragment() {
 
     private var containersListAdapter: ReportsSummaryListAdapter? = null
 
-    private val reportsSummaryViewModel: ReportsSummaryViewModel by viewModels(
+    private val reportsViewModel: ReportsViewModel by viewModels(
         ownerProducer = { requireActivity() }
     )
 
@@ -54,7 +49,7 @@ class ReportsSummaryFragment() : Fragment() {
 
         mActivity = requireActivity() as MainActivity
 
-        reportsSummaryViewModel.containerResponse.observe(
+        reportsViewModel.containerResponse.observe(
             viewLifecycleOwner,
             containerLocationObserver
         )
@@ -63,7 +58,7 @@ class ReportsSummaryFragment() : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        reportsSummaryViewModel.containerResponse.removeObservers(viewLifecycleOwner)
+        reportsViewModel.containerResponse.removeObservers(viewLifecycleOwner)
 
         containersListAdapter?.removeCallBacks()
         containersListAdapter = null
@@ -76,11 +71,12 @@ class ReportsSummaryFragment() : Fragment() {
             itemAnimator = DefaultItemAnimator()
             adapter = containersListAdapter
         }
-        reportsSummaryViewModel.getReportContainersParcelsCount()
+        reportsViewModel.getReportContainersParcelsCount()
     }
 
     private val adapterCallBacks = object : ReportsSummaryListAdapter.CallBacks {
         override fun onSelectedContainer(container: ReportContainer) {
+            mActivity.goToReportContainerParcelsFragment(reportsViewModel.getScannedParcelsByContainer(container.name))
         }
     }
 

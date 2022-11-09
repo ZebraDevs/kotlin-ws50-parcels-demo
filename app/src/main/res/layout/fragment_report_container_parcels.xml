@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    android:padding="@dimen/def_half_half_margin">
+
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/parcels_searchview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/searchview_background"
+        android:theme="@style/SearchViewStyle"
+        app:iconifiedByDefault="false"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:queryHint="Parcels Search"
+        app:searchIcon="@drawable/ic_generic_search" />
+
+    <TextView
+        android:id="@+id/container_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/def_half_half_margin"
+        android:layout_marginBottom="@dimen/def_half_half_margin"
+        android:text="Parcel Barcode"
+        android:textColor="@color/secondary_color"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/parcels_searchview" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/parcels_list"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:listSelector="@android:color/transparent"
+        android:scrollbarStyle="outsideOverlay"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/container_name"
+        tools:listitem="@layout/report_parcels_count_row"
+        tools:visibility="visible" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

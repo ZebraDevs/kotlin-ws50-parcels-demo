@@ -36,8 +36,25 @@
 
     <fragment
         android:id="@+id/reports_summary_fragment"
-        android:name="com.zebra.nilac.csvbarcodelookup.ui.reports.ReportsSummaryFragment"
-        tools:layout="@layout/fragment_report_containers_overview" />
+        android:name="com.zebra.nilac.csvbarcodelookup.ui.reports.ReportSummaryFragment"
+        tools:layout="@layout/fragment_report_containers_overview">
+
+        <action
+            android:id="@+id/action_go_to_report_container_parcels_fragment"
+            app:destination="@id/report_container_parcels_fragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:launchSingleTop="true" />
+
+        <argument
+            android:name="StoredParcels"
+            app:argType="com.zebra.nilac.csvbarcodelookup.models.StoredParcel[]" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/report_container_parcels_fragment"
+        android:name="com.zebra.nilac.csvbarcodelookup.ui.reports.ReportContainerParcelsFragment"
+        tools:layout="@layout/fragment_report_container_parcels" />
 
     <fragment
         android:id="@+id/parcel_barcode_scan_fragment"

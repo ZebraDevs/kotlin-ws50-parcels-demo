@@ -17,7 +17,9 @@ import com.zebra.nilac.csvbarcodelookup.R
 import com.zebra.nilac.csvbarcodelookup.databinding.ActivityMainBinding
 import com.zebra.nilac.csvbarcodelookup.models.Event
 import com.zebra.nilac.csvbarcodelookup.models.Parcel
+import com.zebra.nilac.csvbarcodelookup.models.StoredParcel
 import com.zebra.nilac.csvbarcodelookup.utils.BeepControllerUtil
+import org.apache.commons.lang3.mutable.Mutable
 
 
 class MainActivity : BaseActivity() {
@@ -142,6 +144,14 @@ class MainActivity : BaseActivity() {
         mNavigationController.navigate(
             R.id.action_go_to_reports_summary_fragment
         )
+    }
+
+    fun goToReportContainerParcelsFragment(storedParcels: ArrayList<StoredParcel>) {
+        mNavigationController.navigate(
+            R.id.action_go_to_report_container_parcels_fragment,
+            Bundle().apply {
+                putParcelableArrayList("StoredParcels", storedParcels)
+            })
     }
 
     fun goBackToParcelBarcodeScanScreen() {

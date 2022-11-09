@@ -14,6 +14,9 @@
 
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+
+        <item name="android:textColorHint">@color/light_gray</item>
+        <item name="android:editTextColor">@color/white</item>
     </style>
 
     <style name="Theme.CSVBarcodeLookup.Splash" parent="Theme.MaterialComponents.NoActionBar">
@@ -34,12 +37,17 @@
     </style>
 
     <style name="Theme.Base.Dialog" parent="Theme.MaterialComponents.Light.Dialog.Alert">
-<!--        <item name="android:windowIsFloating">true</item>-->
+        <!--        <item name="android:windowIsFloating">true</item>-->
         <item name="android:windowSoftInputMode">stateUnspecified|adjustPan</item>
         <item name="android:windowActionModeOverlay">false</item>
-<!--        <item name="android:windowCloseOnTouchOutside">true</item>-->
+        <!--        <item name="android:windowCloseOnTouchOutside">true</item>-->
         <item name="android:windowNoTitle">true</item>
-<!--        <item name="android:backgroundDimAmount">.70</item>-->
+        <!--        <item name="android:backgroundDimAmount">.70</item>-->
+    </style>
+
+    <style name="SearchViewStyle" parent="Widget.AppCompat.SearchView">
+        <item name="iconifiedByDefault">false</item>
+        <item name="colorControlActivated">@color/secondary_color</item>
     </style>
 
 </resources>
