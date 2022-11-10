@@ -26,7 +26,11 @@
     <string name="setting_aim_type">AIM Type</string>
     <string name="setting_aim_timer_timeout">AIM Timer</string>
     <string name="setting_aim_same_barcode_timeout">Same Barcode TimeOut</string>
-    <string name="setting_enable_led_on_scanning">Enable Side LEDs when scanning</string>
+    <string name="setting_enable_confirmation_screen_on_scanning">Enable "Successful Confirmation" while scanning</string>
+
+    <string name="setting_reset_report_data_label">By clicking, it will reset current report session &amp; all the scanned data</string>
+    <string name="setting_re_import_container_locations_label">By clicking, it will reimport the available container locations</string>
+    <string name="setting_re_import_parcels_data_label">By clicking, it will reimport the parcels data</string>
 
     <!-- Dashboard -->
     <string name="dashboard_parcels_scan_entry">Parcels Scan</string>

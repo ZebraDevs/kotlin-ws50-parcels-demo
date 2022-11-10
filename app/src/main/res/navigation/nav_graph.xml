@@ -31,7 +31,7 @@
 
     <fragment
         android:id="@+id/settings_fragment"
-        android:name="com.zebra.nilac.csvbarcodelookup.ui.SettingsFragment"
+        android:name="com.zebra.nilac.csvbarcodelookup.ui.settings.SettingsFragment"
         tools:layout="@layout/fragment_settings" />
 
     <fragment

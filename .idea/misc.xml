@@ -34,7 +34,7 @@
         <entry key="app/src/main/res/layout/fragment_parcel_barcode_scan.xml" value="0.45" />
         <entry key="app/src/main/res/layout/fragment_report_container_parcels.xml" value="0.625" />
         <entry key="app/src/main/res/layout/fragment_report_containers_overview.xml" value="0.5" />
-        <entry key="app/src/main/res/layout/fragment_settings.xml" value="0.3065412569474134" />
+        <entry key="app/src/main/res/layout/fragment_settings.xml" value="0.45" />
         <entry key="app/src/main/res/layout/generic_container.xml" value="0.3056861906797777" />
         <entry key="app/src/main/res/layout/generic_location_container.xml" value="0.75" />
         <entry key="app/src/main/res/layout/report_container_parcels_count_row.xml" value="0.45" />
