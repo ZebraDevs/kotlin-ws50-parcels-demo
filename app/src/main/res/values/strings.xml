@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">CSV Barcode Lookup</string>
+    <string name="app_name">Parcels Demo</string>
 
     <string name="init_screen_emdk_check">Initialising EMDK …</string>
     <string name="init_screen_emdk_success">EMDK Manager successfully initialised</string>

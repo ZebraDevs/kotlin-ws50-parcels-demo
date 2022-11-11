@@ -126,14 +126,13 @@ class ContainerConfirmationFragment : Fragment() {
 
                 mActivity.updateLedStatus(true)
                 mActivity.showSuccessDialog()
-
-                goBackToParcelBarcodeScanScreen()
             } else {
                 BeepControllerUtil(mContext).beep(false)
 
                 mActivity.updateLedStatus(false)
                 mActivity.showErrorDialog("Parcel was already stored in this location!")
             }
+            goBackToParcelBarcodeScanScreen()
         }
 
     companion object {
