@@ -8,7 +8,7 @@ object AppConstants {
     const val SHARED_PREFERENCES_CONSTANT_NAME = BuildConfig.APPLICATION_ID + ".data"
 
     const val DW_PROFILE_NAME = "CsvBarcodeLookup"
-    const val FOLDER_NAME = "csv-barcode-lookup"
+    const val FOLDER_NAME = "ws50-parcels-demo"
 
     const val CSV_FILE_NAME = "parcels_list.csv"
     const val CSV_FILE_NAME_S = "parcels_list_sample.csv"
