@@ -4,7 +4,7 @@
 Demo Application which can be used to demonstrate the scanning capabilities of the WS50 in an environment such as a Warehouse one, where the worker has to scan the barcodes of the parcels and put them into the correct container locations.
 The normal workflow of the application would be as follow:
 
-![Parcels-Demo-Diagram](https://user-images.githubusercontent.com/6454841/201375803-90c09808-383b-4dc4-8d01-67b76737088b.png)
+![Parcels-Demo-Diagram](https://user-images.githubusercontent.com/6454841/201395580-45b68c7f-9adf-4b5f-b412-6a3cd8ece3ab.png)
 
 ## Features
 
