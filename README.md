@@ -49,6 +49,23 @@ The files names will be different this time and they will not be the same as the
 /sdcard/ws50-parcels-demo/parcels_list.json
 ```
 
+# Screenshots
+
+![Screenshot_20221109_160800](https://user-images.githubusercontent.com/6454841/201387770-d7d389fc-0cb3-4843-b948-196ef6916d2c.png)
+![Screenshot_20221109_160813](https://user-images.githubusercontent.com/6454841/201387767-4c002951-0d1f-44ab-a1f8-b33e3ed6fc83.png)
+![Screenshot_20221109_160846](https://user-images.githubusercontent.com/6454841/201387763-592f2e33-d6bc-4ec8-bcce-a150b08e9cf1.png)
+![Screenshot_20221109_160840](https://user-images.githubusercontent.com/6454841/201387765-0bb7c9db-a9f9-4a18-9455-1d874780d240.png)
+
+![Screenshot_20221109_170337](https://user-images.githubusercontent.com/6454841/201387761-8575cbf2-bcce-4efb-8ef5-e93ee707ee49.png)
+![Screenshot_20221109_170504](https://user-images.githubusercontent.com/6454841/201387759-45338d16-62f5-44a3-a785-161ea16dd336.png)
+![Screenshot_20221109_170519](https://user-images.githubusercontent.com/6454841/201387758-8258948e-698e-4ba8-a4ee-9bff6ba37b62.png)
+![Screenshot_20221109_170527](https://user-images.githubusercontent.com/6454841/201387749-0dfa0aed-9baf-4196-8a06-ac8068184d4a.png)
+
+![Screenshot_20221109_160749](https://user-images.githubusercontent.com/6454841/201387773-708ba8fa-63ce-4c03-b906-0852213debf8.png)
+![Screenshot_20221109_160709](https://user-images.githubusercontent.com/6454841/201387781-50622ae9-0c51-41be-adb3-adbd1458893f.png)
+![Screenshot_20221109_160733](https://user-images.githubusercontent.com/6454841/201387778-241b63a4-7617-4dae-972e-75429a1dec7a.png)
+
+
 # License
 
 [MIT](LICENSE.txt)
