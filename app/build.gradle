@@ -11,8 +11,8 @@ android {
         applicationId "com.zebra.nilac.csvbarcodelookup"
         minSdk 30
         targetSdk 32
-        versionCode 200
-        versionName "2.0"
+        versionCode 201
+        versionName "2.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -24,10 +24,19 @@ android {
         }
     }
 
+    applicationVariants.all { variant ->
+        variant.outputs.all { output ->
+            outputFileName = new File(
+                    "ws50-parcels-demo-release" + "-" + versionName + ".apk")
+        }
+    }
+
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
     kotlinOptions {
         jvmTarget = '1.8'
     }
