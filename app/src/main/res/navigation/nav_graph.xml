@@ -27,7 +27,18 @@
             app:destination="@id/reports_summary_fragment"
             app:enterAnim="@anim/fade_in"
             app:exitAnim="@anim/fade_out" />
+
+        <action
+            android:id="@+id/action_go_to_info_fragment"
+            app:destination="@id/info_fragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out" />
     </fragment>
+
+    <fragment
+        android:id="@+id/info_fragment"
+        android:name="com.zebra.nilac.csvbarcodelookup.ui.info.InfoFragment"
+        tools:layout="@layout/fragment_info" />
 
     <fragment
         android:id="@+id/settings_fragment"

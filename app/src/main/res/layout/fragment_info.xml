@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    android:fitsSystemWindows="true"
+    android:padding="14dp"
+    tools:context=".ui.main.MainActivity">
+
+    <LinearLayout
+        android:id="@+id/version_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="14dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="sans-serif-medium"
+            android:text="Version"
+            android:textColor="@color/white"
+            android:textSize="7pt" />
+
+        <TextView
+            android:id="@+id/app_version"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/def_quad_margin"
+            android:drawablePadding="10dp"
+            android:fontFamily="sans-serif-medium"
+            android:textColor="@color/secondary_color"
+            android:textSize="9pt"
+            tools:text="1.20" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/def_half_half_margin"
+            android:fontFamily="sans-serif-medium"
+            android:text="Developer"
+            android:textColor="@color/white"
+            android:textSize="7pt" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/def_quad_margin"
+            android:drawablePadding="10dp"
+            android:fontFamily="sans-serif-medium"
+            android:text="Daniel Neamtu"
+            android:textColor="@color/secondary_color"
+            android:textSize="9pt" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/def_half_half_margin"
+            android:fontFamily="sans-serif-medium"
+            android:text="More Info"
+            android:textColor="@color/white"
+            android:textSize="7pt" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/def_quad_margin"
+            android:drawablePadding="10dp"
+            android:fontFamily="sans-serif-medium"
+            android:text="tinyurl.com/4rtyhx54"
+            android:textAlignment="center"
+            android:textColor="@color/secondary_color"
+            android:textSize="9pt" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

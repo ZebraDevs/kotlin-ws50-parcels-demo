@@ -140,6 +140,12 @@ class MainActivity : BaseActivity() {
         )
     }
 
+    fun goToInfoFragment() {
+        mNavigationController.navigate(
+            R.id.action_go_to_info_fragment
+        )
+    }
+
     fun goToReportsSummaryFragment() {
         mNavigationController.navigate(
             R.id.action_go_to_reports_summary_fragment
