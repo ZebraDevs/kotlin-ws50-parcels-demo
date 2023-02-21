@@ -16,6 +16,9 @@ interface ReportDao {
     @Query("SELECT * FROM stored_parcels")
     fun getParcels(): List<StoredParcel>
 
+    @Query("SELECT COUNT(*) FROM stored_parcels")
+    fun getParcelsTotalCount(): Int
+
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertNewStoredParcel(storedParcel: StoredParcel)
 

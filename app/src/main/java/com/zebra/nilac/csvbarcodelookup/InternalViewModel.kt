@@ -7,6 +7,7 @@ import com.zebra.nilac.csvbarcodelookup.models.Parcel
 import com.zebra.nilac.csvbarcodelookup.models.StoredParcel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import org.apache.commons.lang3.mutable.Mutable
 
 class InternalViewModel : ViewModel() {
 
@@ -19,6 +20,16 @@ class InternalViewModel : ViewModel() {
 
     val barcodeResponse: MutableLiveData<Event<String>> = MutableLiveData()
     val parcelReportInsertionResponse: MutableLiveData<Event<Parcel>> = MutableLiveData()
+
+    val parcelsAndStoredCount: MutableLiveData<Event<String>> = MutableLiveData()
+
+    fun getParcelsAndStoredCount() {
+        viewModelScope.launch(Dispatchers.IO) {
+            val count = parcelsDao.getParcelsTotalCount()
+            val storedCount = reportsDao.getParcelsTotalCount()
+            parcelsAndStoredCount.postValue(Event("Parcel $storedCount of $count"))
+        }
+    }
 
     fun getParcelByBarcode(barcode: String) {
         viewModelScope.launch(Dispatchers.IO) {
