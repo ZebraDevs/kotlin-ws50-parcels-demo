@@ -31,7 +31,7 @@ object ExcelDataExtractor {
         if (!AppConstants.CSV_FILE_PATH.exists()) {
             Log.w(
                 TAG,
-                "No CSV File found at specified destination and DB is empty, pouring data with samples info"
+                "No CSV File found at specified location and DB is empty, pouring data with samples info"
             )
             extractDataFromAssetsFile(callBacks)
         } else {
@@ -41,6 +41,18 @@ object ExcelDataExtractor {
             )
             extractDataFromFile(AppConstants.CSV_FILE_PATH, callBacks)
         }
+    }
+
+    fun extractDataFromFile(callBacks: CallBacks) {
+        if (!AppConstants.CSV_FILE_PATH.exists()) {
+            Log.w(
+                TAG,
+                "No CSV File found at specified location!"
+            )
+            callBacks.onFailed("No CSV File found at specified location!")
+            return
+        }
+        extractDataFromFile(AppConstants.CSV_FILE_PATH, callBacks)
     }
 
     private fun extractDataFromAssetsFile(callBacks: CallBacks) {

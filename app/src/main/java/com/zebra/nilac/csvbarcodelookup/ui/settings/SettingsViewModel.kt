@@ -32,7 +32,7 @@ class SettingsViewModel : ViewModel() {
 
             val dataImportObject = DataImportObject()
 
-            ExcelDataExtractor.extractData(object : ExcelDataExtractor.CallBacks {
+            ExcelDataExtractor.extractDataFromFile(object : ExcelDataExtractor.CallBacks {
                 override fun onFinished() {
                     Log.i(TAG, "Successfully imported data from CSV file...")
 
