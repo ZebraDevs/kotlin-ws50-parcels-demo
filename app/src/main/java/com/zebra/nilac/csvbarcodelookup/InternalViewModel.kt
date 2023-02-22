@@ -21,13 +21,13 @@ class InternalViewModel : ViewModel() {
     val barcodeResponse: MutableLiveData<Event<String>> = MutableLiveData()
     val parcelReportInsertionResponse: MutableLiveData<Event<Parcel>> = MutableLiveData()
 
-    val parcelsAndStoredCount: MutableLiveData<Event<String>> = MutableLiveData()
+    val parcelsAndStoredCount: MutableLiveData<Event<Array<Int>>> = MutableLiveData()
 
     fun getParcelsAndStoredCount() {
         viewModelScope.launch(Dispatchers.IO) {
             val count = parcelsDao.getParcelsTotalCount()
             val storedCount = reportsDao.getParcelsTotalCount()
-            parcelsAndStoredCount.postValue(Event("Parcel $storedCount of $count"))
+            parcelsAndStoredCount.postValue(Event(arrayOf(storedCount, count)))
         }
     }
 

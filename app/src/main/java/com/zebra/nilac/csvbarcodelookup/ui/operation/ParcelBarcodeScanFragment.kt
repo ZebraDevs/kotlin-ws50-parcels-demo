@@ -6,14 +6,17 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.zebra.nilac.csvbarcodelookup.InternalViewModel
+import com.zebra.nilac.csvbarcodelookup.R
 import com.zebra.nilac.csvbarcodelookup.databinding.FragmentContainerConfirmationBinding
 import com.zebra.nilac.csvbarcodelookup.databinding.FragmentParcelBarcodeScanBinding
 import com.zebra.nilac.csvbarcodelookup.models.Event
 import com.zebra.nilac.csvbarcodelookup.models.Parcel
+import com.zebra.nilac.csvbarcodelookup.ui.main.MainActivity
 
 class ParcelBarcodeScanFragment : Fragment() {
 
@@ -21,6 +24,7 @@ class ParcelBarcodeScanFragment : Fragment() {
     private val binding get() = mBinder!!
 
     private lateinit var mContext: Context
+    private lateinit var mActivity: MainActivity
 
     private val internalViewModel: InternalViewModel by viewModels(
         ownerProducer = { requireActivity() }
@@ -44,17 +48,31 @@ class ParcelBarcodeScanFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        mActivity = requireActivity() as MainActivity
+
         internalViewModel.parcelsAndStoredCount.observe(
             viewLifecycleOwner,
-            object : Observer<Event<String>> {
-                override fun onChanged(countEvent: Event<String>) {
-                    val count = countEvent.contentIfNotHandled
+            object : Observer<Event<Array<Int>>> {
+                override fun onChanged(countEvent: Event<Array<Int>>) {
+                    val countArray = countEvent.contentIfNotHandled
 
-                    if (count.isNullOrEmpty()) {
+                    if (countArray.isNullOrEmpty()) {
                         return
                     }
 
-                    mBinder?.parcelSuccessfulCount!!.text = count
+                    val storedCount = countArray[0]
+                    val count = countArray[1]
+
+                    mBinder?.parcelSuccessfulCount!!.text = getString(
+                        R.string.main_screen_stored_parcels_count,
+                        storedCount,
+                        count
+                    )
+
+                    if (storedCount == count) {
+                        mActivity.showSuccessDialog(getString(R.string.main_screen_task_completed_message))
+                        mActivity.goBackToDashboard()
+                    }
                 }
             })
         internalViewModel.getParcelsAndStoredCount()

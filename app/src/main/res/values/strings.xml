@@ -16,8 +16,10 @@
     <string name="init_process_load_csv_data_failed">Failed to import data: %s</string>
     <string name="init_process_load_csv_data_success">Successfully loaded data from CSV file</string>
 
+    <string name="main_screen_stored_parcels_count">Parcel %d of %d</string>
     <string name="main_screen_welcome_text">Scan a barcode to start!</string>
     <string name="main_screen_barcode_scan_failed">No parcel was found with the scanned barcode</string>
+    <string name="main_screen_task_completed_message">Task Completed!</string>
 
     <string name="product_number_label">Product Number</string>
     <string name="product_name_label">Product Name</string>
