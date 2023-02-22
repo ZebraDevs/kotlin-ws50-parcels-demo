@@ -125,7 +125,7 @@ class ContainerConfirmationFragment : Fragment() {
                 BeepControllerUtil(mContext).beep(true)
 
                 mActivity.updateLedStatus(true)
-                mActivity.showSuccessDialog()
+                mActivity.showSuccessDialog("")
             } else {
                 BeepControllerUtil(mContext).beep(false)
 

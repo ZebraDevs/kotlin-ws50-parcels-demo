@@ -111,7 +111,7 @@ class MainActivity : BaseActivity() {
                 showErrorDialog(getString(R.string.main_screen_barcode_scan_failed))
             } else {
                 BeepControllerUtil(this).beep(true)
-                showSuccessDialog()
+                showSuccessDialog("")
                 updateLedStatus(true)
 
                 goToContainerConfirmationScreen(parcel)

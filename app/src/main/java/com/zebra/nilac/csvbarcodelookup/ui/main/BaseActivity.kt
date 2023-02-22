@@ -43,7 +43,7 @@ open class BaseActivity : AppCompatActivity() {
         mErrorDialog?.show(transaction, ErrorDialogFragment::class.java.name)
     }
 
-    fun showSuccessDialog() {
+    fun showSuccessDialog(message: String) {
         if (mSharedPreferences.contains(AppConstants.USE_GREEN_DIALOG_WHILE_SCANNING) && !mSharedPreferences.getBoolean(
                 AppConstants.USE_GREEN_DIALOG_WHILE_SCANNING,
                 false
@@ -60,6 +60,14 @@ open class BaseActivity : AppCompatActivity() {
         transaction.setCustomAnimations(R.anim.fade_in, R.anim.fade_out)
 
         mSuccessDialog = SuccessDialogFragment()
+
+        if (message.isNotEmpty()) {
+            val arguments = Bundle().apply {
+                putString(SuccessDialogFragment.MESSAGE, message)
+            }
+            mSuccessDialog!!.arguments = arguments
+        }
+
         mSuccessDialog?.isCancelable = false
         mSuccessDialog?.show(transaction, SuccessDialogFragment::class.java.name)
     }

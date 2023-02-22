@@ -42,6 +42,11 @@ class SuccessDialogFragment : DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val arguments = arguments
+        if (arguments != null && arguments.containsKey(MESSAGE)) {
+            binding.loadingStatusText.text = arguments.getString(MESSAGE)
+        }
+
         Timer().apply {
             schedule(object : TimerTask() {
                 override fun run() {
@@ -56,5 +61,9 @@ class SuccessDialogFragment : DialogFragment() {
         super.onResume()
         dialog?.window?.setBackgroundDrawableResource(android.R.color.transparent)
         dialog?.setCancelable(false)
+    }
+
+    companion object {
+        const val MESSAGE = "com.zebra.nilac.csvbarcodelookup.ui.status.MESSAGE"
     }
 }

@@ -9,6 +9,7 @@
     android:padding="10dp">
 
     <ImageView
+        android:id="@+id/success_thick"
         android:layout_width="70dp"
         android:layout_height="70dp"
         android:src="@drawable/ic_generic_check"
@@ -16,5 +17,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/loading_status_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/def_half_margin"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/success_thick"
+        tools:text="Checking EMDK..." />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
