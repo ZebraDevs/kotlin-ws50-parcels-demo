@@ -11,8 +11,8 @@ android {
         applicationId "com.zebra.nilac.csvbarcodelookup"
         minSdk 30
         targetSdk 32
-        versionCode 204
-        versionName "2.4"
+        versionCode 205
+        versionName "2.5"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -64,12 +64,6 @@ dependencies {
 
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.5.1"
-
-    // EMDK Loader
-    implementation 'com.github.nilac8991:emdk-loader-lib:1.0.3'
-
-    // EMDK
-    implementation 'com.symbol:emdk:9.1.1'
 
     //OpenCSV
     implementation 'com.opencsv:opencsv:4.6'
