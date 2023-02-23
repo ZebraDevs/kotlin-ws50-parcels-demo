@@ -1,21 +1,20 @@
 package com.zebra.nilac.csvbarcodelookup.ui.operation
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import com.zebra.nilac.csvbarcodelookup.AppConstants
+import com.zebra.nilac.csvbarcodelookup.DefaultApplication
 import com.zebra.nilac.csvbarcodelookup.InternalViewModel
 import com.zebra.nilac.csvbarcodelookup.R
-import com.zebra.nilac.csvbarcodelookup.databinding.FragmentContainerConfirmationBinding
 import com.zebra.nilac.csvbarcodelookup.databinding.FragmentParcelBarcodeScanBinding
 import com.zebra.nilac.csvbarcodelookup.models.Event
-import com.zebra.nilac.csvbarcodelookup.models.Parcel
 import com.zebra.nilac.csvbarcodelookup.ui.main.MainActivity
 
 class ParcelBarcodeScanFragment : Fragment() {
@@ -25,6 +24,9 @@ class ParcelBarcodeScanFragment : Fragment() {
 
     private lateinit var mContext: Context
     private lateinit var mActivity: MainActivity
+
+    private val mSharedPreferences: SharedPreferences =
+        DefaultApplication.getInstance().sharedPreferencesInstance!!
 
     private val internalViewModel: InternalViewModel by viewModels(
         ownerProducer = { requireActivity() }
@@ -70,6 +72,14 @@ class ParcelBarcodeScanFragment : Fragment() {
                     )
 
                     if (storedCount == count) {
+                        if (mSharedPreferences.getBoolean(
+                                AppConstants.RESET_REPORTS_AFTER_TASK_COMPLETED,
+                                true
+                            )
+                        ) {
+                            internalViewModel.resetReportsWithoutConfirmation()
+                        }
+
                         mActivity.showSuccessDialog(getString(R.string.main_screen_task_completed_message))
                         mActivity.goBackToDashboard()
                     }

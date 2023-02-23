@@ -1,13 +1,15 @@
 package com.zebra.nilac.csvbarcodelookup
 
-import androidx.lifecycle.*
-import com.zebra.nilac.csvbarcodelookup.DefaultApplication
+import android.util.Log
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.zebra.nilac.csvbarcodelookup.models.Event
 import com.zebra.nilac.csvbarcodelookup.models.Parcel
 import com.zebra.nilac.csvbarcodelookup.models.StoredParcel
+import com.zebra.nilac.csvbarcodelookup.ui.settings.SettingsViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import org.apache.commons.lang3.mutable.Mutable
 
 class InternalViewModel : ViewModel() {
 
@@ -54,6 +56,14 @@ class InternalViewModel : ViewModel() {
                 )
             )
             parcelReportInsertionResponse.postValue(Event(parcel))
+        }
+    }
+
+    fun resetReportsWithoutConfirmation() {
+        Log.i(SettingsViewModel.TAG, "Resetting current Report Session...")
+
+        viewModelScope.launch(Dispatchers.IO) {
+            reportsDao.cleanAll()
         }
     }
 }

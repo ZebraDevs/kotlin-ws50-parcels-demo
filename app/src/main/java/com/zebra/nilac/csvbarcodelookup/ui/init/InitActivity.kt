@@ -1,6 +1,7 @@
 package com.zebra.nilac.csvbarcodelookup.ui.init
 
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.os.Environment
 import android.util.Log
@@ -8,6 +9,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.zebra.nilac.csvbarcodelookup.AppConstants
+import com.zebra.nilac.csvbarcodelookup.DefaultApplication
 import com.zebra.nilac.csvbarcodelookup.R
 import com.zebra.nilac.csvbarcodelookup.databinding.ActivityInitBinding
 import com.zebra.nilac.csvbarcodelookup.models.DataImportObject
@@ -17,6 +19,9 @@ class InitActivity : AppCompatActivity() {
 
     private val initViewModel: InitViewModel by viewModels()
     private lateinit var mBinder: ActivityInitBinding
+
+    private val mSharedPreferences: SharedPreferences =
+        DefaultApplication.getInstance().sharedPreferencesInstance!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,6 +36,12 @@ class InitActivity : AppCompatActivity() {
         mBinder.loadingStatusText.text = getString(R.string.init_screen_emdk_check)
 
         initViewModel.isDataImported.observe(this, dataImportObserver)
+
+        //Enable RESET_REPORTS_AFTER_TASK_COMPLETED Preference
+        if (!mSharedPreferences.contains(AppConstants.RESET_REPORTS_AFTER_TASK_COMPLETED)) {
+            mSharedPreferences.edit()
+                .putBoolean(AppConstants.RESET_REPORTS_AFTER_TASK_COMPLETED, true).apply()
+        }
 
         if (Environment.isExternalStorageManager()) {
             mBinder.loadingStatusText.text =

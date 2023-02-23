@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
-import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -18,7 +17,6 @@ import com.zebra.nilac.csvbarcodelookup.DefaultApplication
 import com.zebra.nilac.csvbarcodelookup.R
 import com.zebra.nilac.csvbarcodelookup.databinding.FragmentSettingsBinding
 import com.zebra.nilac.csvbarcodelookup.models.DataImportObject
-import com.zebra.nilac.csvbarcodelookup.ui.init.InitViewModel
 import com.zebra.nilac.csvbarcodelookup.ui.main.MainActivity
 
 class SettingsFragment : Fragment() {
@@ -104,6 +102,13 @@ class SettingsFragment : Fragment() {
                 putBoolean(
                     AppConstants.USE_GREEN_DIALOG_WHILE_SCANNING,
                     binding.useLedsChoiceYesRadio.isChecked
+                )
+            }.apply()
+
+            DefaultApplication.getInstance().sharedPreferencesInstance!!.edit().apply {
+                putBoolean(
+                    AppConstants.RESET_REPORTS_AFTER_TASK_COMPLETED,
+                    binding.resetReportChoiceYesRadio.isChecked
                 )
             }.apply()
 

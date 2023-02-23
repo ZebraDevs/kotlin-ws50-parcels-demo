@@ -25,5 +25,7 @@ object AppConstants {
     const val DW_SCANNER_INTENT_ACTION = "com.zebra.nilac.csvbarcodelookup.SCANNER"
     const val DW_DATA_STRING_TAG = "com.symbol.datawedge.data_string"
 
-    const val USE_GREEN_DIALOG_WHILE_SCANNING = "com.zebra.nilac.csvbarcodelookup.USE_GREEN_DIALOG_WHILE_SCANNING"
+    const val USE_GREEN_DIALOG_WHILE_SCANNING =
+        "com.zebra.nilac.csvbarcodelookup.USE_GREEN_DIALOG_WHILE_SCANNING"
+    const val RESET_REPORTS_AFTER_TASK_COMPLETED = "com.zebra.nilac.csvbarcodelookup.RESET_REPORTS_AFTER_TASK_COMPLETED"
 }

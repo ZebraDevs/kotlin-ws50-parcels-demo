@@ -121,6 +121,52 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/reset_report_after_task_chk_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/def_half_margin"
+                android:layout_marginBottom="@dimen/def_half_margin"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:text="@string/setting_reset_report_data_after_task_completed"
+                    android:textColor="@color/white"
+                    android:textSize="14sp" />
+
+                <RadioGroup
+                    android:id="@+id/reset_report_radio_group"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.radiobutton.MaterialRadioButton
+                        android:id="@+id/reset_report_choice_yes_radio"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:checked="true"
+                        android:text="Yes"
+                        android:textColor="@color/white"
+                        android:textSize="14sp" />
+
+                    <com.google.android.material.radiobutton.MaterialRadioButton
+                        android:id="@+id/reset_report_choice_no_radio"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:text="No"
+                        android:textColor="@color/white"
+                        android:textSize="14sp" />
+                </RadioGroup>
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:id="@+id/data_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
