@@ -53,7 +53,7 @@ class SuccessDialogFragment : DialogFragment() {
                     dismiss()
                     cancel()
                 }
-            }, 1000L)
+            }, 1600L)
         }
     }
 
