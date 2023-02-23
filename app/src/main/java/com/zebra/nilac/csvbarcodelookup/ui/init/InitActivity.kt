@@ -33,11 +33,17 @@ class InitActivity : AppCompatActivity() {
         Log.i(TAG, "Initialising Application...")
         mBinder.loadingStatusText.text = getString(R.string.init_screen_emdk_check)
 
-        initViewModel.isPermissionGranted.observe(this, storagePermissionObserver)
         initViewModel.isDWProfileGenerated.observe(this, dwProfileObserver)
         initViewModel.isDataImported.observe(this, dataImportObserver)
 
-        initViewModel.grantManageExternalStoragePermission()
+        if (Environment.isExternalStorageManager()) {
+            mBinder.loadingStatusText.text =
+                getString(R.string.init_process_storage_permission_profile_success)
+            checkIfDWProfileExists()
+        } else {
+            mBinder.loadingStatusText.text =
+                getString(R.string.init_process_storage_permission_profile_failed)
+        }
     }
 
     private fun checkIfDWProfileExists() {
@@ -83,18 +89,6 @@ class InitActivity : AppCompatActivity() {
 
         sendBroadcast(dwIntent)
     }
-
-    private val storagePermissionObserver: Observer<Boolean> =
-        Observer<Boolean> { isGranted ->
-            if (isGranted && Environment.isExternalStorageManager()) {
-                mBinder.loadingStatusText.text =
-                    getString(R.string.init_process_storage_permission_profile_success)
-                checkIfDWProfileExists()
-            } else {
-                mBinder.loadingStatusText.text =
-                    getString(R.string.init_process_storage_permission_profile_failed)
-            }
-        }
 
     private val dwProfileObserver: Observer<Boolean> =
         Observer { isGenerated ->

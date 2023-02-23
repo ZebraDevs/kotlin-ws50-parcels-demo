@@ -27,36 +27,8 @@ class InitViewModel : ViewModel() {
 
     private val parcelsDao = DefaultApplication.getInstance().getAppDatabaseInstance().parcelsDao
 
-    val isPermissionGranted: MutableLiveData<Boolean> = MutableLiveData()
     val isDWProfileGenerated: MutableLiveData<Boolean> = MutableLiveData()
     val isDataImported: MutableLiveData<DataImportObject> = MutableLiveData()
-
-    fun grantManageExternalStoragePermission() {
-        Log.i(TAG, "Granting External Storage Permission through MX")
-
-        if (!EMDKLoader.getInstance().isManagerInit()) {
-            initEMDKManager()
-            return
-        }
-
-        ProfileLoader().processProfile(
-            "AccessManager",
-            null,
-            object : ProfileLoaderResultCallback {
-                override fun onProfileLoadFailed(errorObject: EMDKResults) {
-                    //Nothing to see here...
-                }
-
-                override fun onProfileLoadFailed(message: String) {
-                    Log.e(TAG, "Failed to process External Storage Permission!")
-                    isPermissionGranted.postValue(false)
-                }
-
-                override fun onProfileLoaded() {
-                    isPermissionGranted.postValue(true)
-                }
-            })
-    }
 
     fun createDWProfile() {
         ProfileLoader().processProfile(
@@ -161,13 +133,10 @@ class InitViewModel : ViewModel() {
             object : EMDKManagerInitCallBack {
                 override fun onFailed(message: String) {
                     Log.e(TAG, "Failed to initialise EMDK Manager")
-                    isPermissionGranted.postValue(false)
                 }
 
                 override fun onSuccess() {
                     Log.i(TAG, "EMDK Manager was successfully initialised")
-
-                    grantManageExternalStoragePermission()
                 }
             })
     }

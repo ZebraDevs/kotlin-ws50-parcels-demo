@@ -5,8 +5,8 @@
     <string name="init_screen_emdk_success">EMDK Manager successfully initialised</string>
     <string name="init_screen_emdk_failed">Failed to initialise EMDK Manager</string>
 
-    <string name="init_process_storage_permission_profile_failed">Failed to process storage permission profile</string>
-    <string name="init_process_storage_permission_profile_success">Successfully processed storage permission profile</string>
+    <string name="init_process_storage_permission_profile_failed">Managed External Storage permission was not granted!</string>
+    <string name="init_process_storage_permission_profile_success">Managed External Storage permission is granted!</string>
 
     <string name="init_process_dw_profile_failed">Failed to process DW profile</string>
     <string name="init_process_dw_profile_success">Successfully processed DW profile</string>
