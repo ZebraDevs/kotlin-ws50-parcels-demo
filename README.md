@@ -12,8 +12,8 @@ The normal workflow of the application would be as follow:
 - Ability to import personalised samples data
     - Parcels Data as CSV File
     - Container Locations as JSON File
-- "Manage External Storage" permission automatically pre-granted by using EMDK
-- DataWedge Profile created and imported automatically by using EMDK
+- "Manage External Storage" permission automatically pre-granted ONLY if the app is installed by using the provided StageNow Barcodes 
+- DataWedge Profile created and imported automatically by using the Intent based APIs
 - Reports Screen
     - Check the amount of scanned parcels per each container location
     - Check in a specific container location the scanned barcodes
@@ -30,6 +30,12 @@ The normal workflow of the application would be as follow:
     - Re-import container locations data
     - Re-import parcels data
 
+## Demo & Installation
+
+If you want to test the application without cloning the repository and manually compile the project, you can check the [demo](https://github.com/ZebraDevs/kotlin-ws50-parcels-demo/tree/master/demo) folder where you'll find: 
+- PDF containing the StageNow barcodes which will download the latest apk and configuration files. Just scan all of them using StageNow and you'll be up and running in a minute!
+- PDF containing the demo barcodes of the parcels and also the QRCodes for the container locations where the parcels should be put into
+
 ## Setup & File Formats
 
 The application already has samples data when installed for the first time and those can be used out of the box without making any changes.
@@ -42,7 +48,7 @@ You can checkout the files in these locations of the project:
 
 In case you want to use personalized data, you will have to use the same format which was used for the samples data contained in the project.
 You will then, have to put the files on the external storage of the WS50 in this precise folder: ```ws50-parcels-demo```.
-The files names will be different this time and they will not be the same as the ones used in the project but they will like this:
+The files names will be different this time and they will not be the same as the ones used in the project but they will be like this:
 
 ```text
 /sdcard/ws50-parcels-demo/container_locations.json
